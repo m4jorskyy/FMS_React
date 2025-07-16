@@ -5,7 +5,7 @@ import Posts from "../components/Posts.jsx";
 
 export default function News() {
     return (
-        <div>
+        <div className={"news"}>
             <h1>News</h1>
             <NewsletterForm />
             <Posts />

@@ -5,11 +5,7 @@ import {Outlet, Link} from 'react-router-dom';
 export default function Layout() {
     return (
         <>
-            <header style={{
-                padding: '1rem',
-                background: '#111',
-                color: 'white'
-            }}>
+            <header className={"app-header"}>
                 <nav style={{
                     display: 'flex',
                     gap: '1rem',
