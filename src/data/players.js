@@ -1,4 +1,4 @@
-//teamPhotos.js
+//players.js
 
 const players = [
     {

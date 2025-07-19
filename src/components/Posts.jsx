@@ -1,29 +1,11 @@
 //Posts.jsx
 
-import {useEffect, useState} from "react";
+import usePosts from "../hooks/usePosts.js";
 
 export default function Posts() {
-
-    const [posts, setPosts] = useState([]);
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const request = new Request("https://jsonplaceholder.typicode.com/posts")
-
-        setLoading(true)
-        fetch(request)
-            .then((response) => response.json())
-            .then((json) => {
-                setPosts(json);
-                setLoading(false)
-            })
-            .catch(err => {
-                setError(err.toString());
-                setLoading(false)
-            })
-    }, [])
-
+    const {
+        posts, error, loading
+    } = usePosts()
     return (
         <div style={{
             display: 'flex',

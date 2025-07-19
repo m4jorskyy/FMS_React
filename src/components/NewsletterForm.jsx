@@ -1,39 +1,16 @@
 //NewsletterForm.jsx
 
-import {useEffect, useState} from "react";
+import useNewsletter from "../hooks/useNewsletter.js";
 
 export default function NewsletterForm() {
-    const [email, setEmail] = useState('')
-    const [error, setError] = useState('')
-    const [showAlert, setShowAlert] = useState(true)
-
-    useEffect(() => {
-        if (error === 'Dziękujemy za zapisanie się do newslettera!') {
-            const timer = setTimeout(() => setShowAlert(false), 3000)
-            return () => clearTimeout(timer)
-        }
-    }, [error])
-
-
-    const handleChange = (event) => {
-        setEmail(event.target.value)
-        setError('')
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if (!email.includes('@')) {
-            setError('Niepoprawny format e-mail')
-        } else {
-            setError('Dziękujemy za zapisanie się do newslettera!')
-            setEmail('')
-            setShowAlert(true)
-        }
-    }
-
-    const handleClose = () => {
-        setShowAlert(false)
-    }
+    const {
+        email,
+        error,
+        showAlert,
+        handleChange,
+        handleSubmit,
+        handleClose
+    } = useNewsletter();
 
     const alertStyle = {
         backgroundColor: '#333',
@@ -50,7 +27,7 @@ export default function NewsletterForm() {
         <>
             {showAlert && (
                 <div style={alertStyle}>
-                    <span className={"closebtn"} onClick={() => handleClose()}>&times;</span>
+                    <span className={"closebtn"} onClick={handleClose}>&times;</span>
                     <form onSubmit={handleSubmit}>
                         <h3>Zapisz się do newslettera!</h3>
                         <input type={"email"} value={email} onChange={handleChange} placeholder={"E-mail"}/>
@@ -58,7 +35,6 @@ export default function NewsletterForm() {
                         <br/>
                         <button type={"submit"}>Zapisz się!</button>
                         {error && (<p>{error}</p>)}
-                        {error === 'Dziękujemy za zapisanie się do newslettera!'}
                     </form>
                 </div>
             )}
