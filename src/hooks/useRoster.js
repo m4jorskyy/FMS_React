@@ -1,28 +1,32 @@
 //useRoster.js
 
-import {useState, useMemo, useCallback} from 'react'
-import players from "../data/players.js";
+import {getPlayers} from "../services/api.js";
+import {useQuery} from "@tanstack/react-query";
 
 function useRoster() {
-    const [searchTerm, setSearchTerm] = useState('')
-
-    const handleSearchTerm = useCallback((e) => {
-        setSearchTerm(e.target.value)
-    }, [])
-
-    const filteredPlayers = useMemo(() =>
-            players.filter(player => player.nick.toLowerCase().includes(searchTerm)),
-        [searchTerm, setSearchTerm]
-    )
-
-    const starters = filteredPlayers.filter((player) => player.teamRole !== 'Coach' && player.teamRole !== 'Sub')
-
-    const coaches = filteredPlayers.filter((player) => player.teamRole === 'Coach')
-
-    const subs = filteredPlayers.filter((player) => player.teamRole === 'Sub')
+   const {
+        data: players = [],
+        isLoading,
+        isError,
+        error
+    } = useQuery({
+        queryKey: ['players'],
+        queryFn: async () => {
+            const json = await getPlayers()
+            return Array.isArray(json) ? json : json.results
+        },
+        staleTime: Infinity,
+        cacheTime: Infinity,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        refetchOnMount: false,
+        retry: 2,
+    })
 
     return {
-        searchTerm, handleSearchTerm, starters, coaches, subs
+        players,
+        loading: isLoading,
+        error: isError ? error : null
     }
 }
 

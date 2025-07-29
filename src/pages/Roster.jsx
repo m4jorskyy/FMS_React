@@ -4,9 +4,12 @@ import PlayerCard from "../components/PlayerCard.jsx";
 import useRoster from "../hooks/useRoster.js";
 
 export default function Roster() {
-    const {
-        searchTerm, handleSearchTerm, starters, coaches, subs
-    } = useRoster()
+
+    const {players, error, loading} = useRoster()
+
+    const starters = players.filter(p => p.team_role === 'Player' || p.team_role === 'Captain')
+    const coaches = players.filter(p => p.team_role === 'Coach')
+    const subs = players.filter(p => p.team_role === 'Sub')
 
     return (
         <div className="roster">
@@ -19,29 +22,29 @@ export default function Roster() {
                 }}
             />
 
-            <input type={"text"} placeholder={"Szukaj po nicku..."} value={searchTerm} onChange={handleSearchTerm}/>
-
             <h2>Starters</h2>
             <div className="starters">
                 {starters.map(starter => (
-                    <PlayerCard key={starter.id} name={starter.name} surname={starter.surname} nick={starter.nick}
-                                teamRole={starter.teamRole} champion={starter.champion} lane={starter.lane}/>
+                    <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
+                                nick={starter.nick}
+                                teamRole={starter.team_role} champion={starter.champion} lane={starter.lane
+                    }/>
                 ))}
             </div>
 
             <h2>Coaches</h2>
             <div className="coaches">
                 {coaches.map(coach => (
-                    <PlayerCard key={coach.id} name={coach.name} surname={coach.surname} nick={coach.nick}
-                                teamRole={coach.teamRole} champion={coach.champion} lane={coach.lane}/>
+                    <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name} nick={coach.nick}
+                                teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
                 ))}
             </div>
 
             <h2>Subs</h2>
             <div className="subs">
                 {subs.map(sub => (
-                    <PlayerCard key={sub.id} name={sub.name} surname={sub.surname} nick={sub.nick}
-                                teamRole={sub.teamRole} champion={sub.champion} lane={sub.lane}/>
+                    <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
+                                teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
                 ))}
             </div>
 

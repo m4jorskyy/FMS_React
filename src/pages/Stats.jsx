@@ -1,7 +1,6 @@
 //Stats.jsx
 
 import useSoloqMatches from '../hooks/useSoloqMatches.js'
-import players from "../data/players.js";
 
 export default function Stats() {
 
