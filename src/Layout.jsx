@@ -22,7 +22,10 @@ export default function Layout() {
                     <Link to={"/highlights"}>Highlights</Link>
                     <Link to={"/contact"}>Contact</Link>
                 </nav>
+
             </header>
+            <Link to={"/login"}>LOGIN</Link>
+            <Link to={"/register"}>REGISTER</Link>
             <main style={{ padding: '1rem' }}>
                 <Outlet />
             </main>

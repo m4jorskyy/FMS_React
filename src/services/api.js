@@ -1,5 +1,7 @@
 //api.js
 
+import Cookies from 'js-cookie'
+
 export async function getMatches(nick, page = 1){
     const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
 
@@ -21,4 +23,34 @@ export async function getPlayers() {
     }
 
     return response.json()
+}
+
+export async function postRegister(firstName, lastName, nick, email, password) {
+    const request = {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
+        body: JSON.stringify({
+            "first_name": firstName,
+            "last_name": lastName,
+            "nick": nick,
+            "email": email,
+            "password": password
+        })
+    }
+
+    const response = await fetch(`http://127.0.0.1:8000/api/register/`, request)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response
 }

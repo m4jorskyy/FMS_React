@@ -13,6 +13,8 @@ import Stats from "./pages/Stats.jsx";
 import Contact from "./pages/Contact.jsx";
 import Highlights from "./pages/Highlights.jsx";
 import Layout from "./Layout.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
     return (
@@ -28,6 +30,8 @@ function App() {
                 <Route path={"/stats"} element={<Stats/>}/>
                 <Route path={"/highlights"} element={<Highlights/>}/>
                 <Route path={"/contact"} element={<Contact/>}/>
+                <Route path={"/login"} element={<Login/>}/>
+                <Route path={"/register"} element={<Register/>}/>
             </Route>
         </Routes>
     )
