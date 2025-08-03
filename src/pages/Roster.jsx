@@ -22,31 +22,45 @@ export default function Roster() {
                 }}
             />
 
-            <h2>Starters</h2>
-            <div className="starters">
-                {starters.map(starter => (
-                    <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
-                                nick={starter.nick}
-                                teamRole={starter.team_role} champion={starter.champion} lane={starter.lane
-                    }/>
-                ))}
-            </div>
+            {starters.length ? (
+                <div>
+                    <h2>Starters</h2>
+                    <div className="starters">
+                        {starters.map(starter => (
+                            <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
+                                        nick={starter.nick}
+                                        teamRole={starter.team_role} champion={starter.champion} lane={starter.lane
+                            }/>
+                        ))}
+                    </div>
+                </div>
+            ) : null}
 
-            <h2>Coaches</h2>
-            <div className="coaches">
-                {coaches.map(coach => (
-                    <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name} nick={coach.nick}
-                                teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
-                ))}
-            </div>
+            {coaches.length ? (
+                <div>
+                    <h2>Coaches</h2>
+                    <div className="coaches">
+                        {coaches.map(coach => (
+                            <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
+                                        nick={coach.nick}
+                                        teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
+                        ))}
+                    </div>
+                </div>
+            ) : null}
 
-            <h2>Subs</h2>
-            <div className="subs">
-                {subs.map(sub => (
-                    <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
-                                teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
-                ))}
-            </div>
+            {subs.length ? (
+                <div>
+                    <h2>Subs</h2>
+                    <div className="subs">
+                        <br/>
+                        {subs.map(sub => (
+                            <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
+                                        teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
+                        ))}
+                    </div>
+                </div>
+            ) : null}
 
 
         </div>

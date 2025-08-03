@@ -37,14 +37,14 @@ export default function RegisterForm(){
 
     return (
         <div className="register-form-container">
-            {showAlert && (
+            {showAlert ? (
                 <div className={`alert ${error ? 'alert--error' : 'alert--success'}`}>
                     <p>{error || success}</p>
                     <button className="alert__close" onClick={handleClose} aria-label="Close">
                         ×
                     </button>
                 </div>
-            )}
+            ) : null }
 
             <form className="register-form" onSubmit={handleSubmit} noValidate>
                 <h3>Zarejestruj się!</h3>
