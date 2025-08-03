@@ -1,6 +1,22 @@
+//PlayerCard.jsx
+
+import useSoloqMatches from "../hooks/useSoloqMatches.js";
+import MatchCard from "./MatchCard.jsx";
+
 export default function PlayerCard({name, surname, nick, lane, champion, teamRole}) {
     const ddVersion = '15.12.1'
     const champImgUrl = `https://ddragon.leagueoflegends.com/cdn/${ddVersion}/img/champion/${champion}.png`
+
+    const {
+        data,
+        isLoading,
+        isError,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage
+    } = useSoloqMatches(nick)
+
+    const matchList = data?.pages.flatMap(page => page.results) || []
 
     return (
         <div style={{
@@ -14,38 +30,55 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
             color: roleTextColors[teamRole] || 'white',
             width: '90%',
         }}>
-            <h3>{name} "{nick}" {surname}</h3>
-            <p style={{
-                marginTop: '-0.75rem',
-            }}>{lane}</p>
-            <img
-                src={`/src/assets/teamPhotos/${nick}.jpg`}
-                alt={nick}
-                style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    objectFit: 'cover'
-                }}
-            />
-            <p>
-                Main:
-                <br />
+            <div>
+                <h3>{name} "{nick}" {surname}</h3>
+                <p style={{
+                    marginTop: '-0.75rem',
+                }}>{lane}</p>
                 <img
-                    src={champImgUrl}
-                    alt={champion}
+                    src={`/src/assets/teamPhotos/${nick}.jpg`}
+                    alt={nick}
                     style={{
-                        height: '50px',
-                        width: '50px'
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        objectFit: 'cover'
                     }}
                 />
-            </p>
+                <p>
+                    Main:
+                    <br/>
+                    <img
+                        src={champImgUrl}
+                        alt={champion}
+                        style={{
+                            height: '50px',
+                            width: '50px'
+                        }}
+                    />
+                </p>
 
-            {teamRole === "Captain" && <p
-            style={{
-                textTransform: 'uppercase',
-                fontWeight: 'bold'
-            }}>owner</p>}
+                {teamRole === "Captain" && <p
+                    style={{
+                        textTransform: 'uppercase',
+                        fontWeight: 'bold'
+                    }}>owner</p>}
+            </div>
+            {matchList.map(match => (
+                <MatchCard key={match.match.match_id} lane={match.lane} assists={match.assists} deaths={match.deaths}
+                           game_duration={match.match.game_duration} game_start={match.match.game_start}
+                           kills={match.kills} summoner={match.summoner} win={match.win}/>
+            ))}
+
+            {hasNextPage && (
+                <button
+                    onClick={() => fetchNextPage()}
+                    disabled={isFetchingNextPage}
+                >
+                    {isFetchingNextPage ? 'Ładowanie…' : 'Pokaż więcej'}
+                </button>
+            )}
+
         </div>
     )
 }

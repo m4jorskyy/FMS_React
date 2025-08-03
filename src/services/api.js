@@ -3,11 +3,13 @@
 import Cookies from 'js-cookie'
 
 export async function getMatches(nick, page = 1) {
-    const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
+    const response = await fetch(`/api/players/${nick}/matches?page=${page}`)
 
     if (!response.ok) {
+        const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
+        error.data = errorData
         throw error
     }
     return response.json()
@@ -17,8 +19,10 @@ export async function getPlayers() {
     const response = await fetch(`/api/players/`)
 
     if (!response.ok) {
+        const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
+        error.data = errorData
         throw error
     }
 
