@@ -32,7 +32,6 @@ export default function useLogin() {
         event.preventDefault()
         setError("")
         setSuccess("")
-
         setLoading(true)
 
         try {

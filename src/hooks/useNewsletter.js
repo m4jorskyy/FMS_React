@@ -1,27 +1,44 @@
 //useNewsletter.js
 
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
+import {useAuth} from "../context/AuthContext.jsx";
+import {postNewsletter} from "../services/api.js";
 
-function useNewsletter() {
+export default function useNewsletter() {
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
     const [showAlert, setShowAlert] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const {token} = useAuth()
+
 
     const handleChange = (e) => {
         setEmail(e.target.value)
         setError('')
+        setSuccess('')
     }
 
     const thanks = 'Dziękujemy za zapisanie się do newslettera!'
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        if(email.includes('@')) {
-            setError(thanks)
-            setEmail('')
+        setLoading(true)
+
+        try {
+            await postNewsletter(email, token)
+            setSuccess(thanks)
             setShowAlert(true)
-        } else {
-            setError('Nieprawidłowy format adresu e-mail!')
+            setEmail("")
+
+        } catch (error) {
+            const errorMessages = Object.entries(error.data)
+                .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+                .join('\n')
+            setError(errorMessages)
+            setShowAlert(true)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -30,15 +47,13 @@ function useNewsletter() {
     }
 
     useEffect(() => {
-        if(error === thanks) {
+        if (success === thanks) {
             const timer = setTimeout(() => handleClose(), 3000)
             return () => clearTimeout(timer)
         }
-    }, [error])
+    }, [success])
 
     return {
-        email, error, showAlert, handleChange, handleSubmit, handleClose
+        email, error, loading, showAlert, success, handleChange, handleSubmit, handleClose
     }
 }
-
-export default useNewsletter;

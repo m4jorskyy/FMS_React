@@ -1,31 +1,24 @@
 //usePosts.js
 
-import {useEffect, useState} from "react";
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {getPosts} from "../services/api.js";
 
 function usePosts() {
-    const [posts, setPosts] = useState([]);
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+    return useInfiniteQuery({
+        queryKey: ['posts'],
+        queryFn: ({pageParam = 1}) => getPosts(pageParam),
+        getNextPageParam: lastPage => {
+            if (!lastPage.next) return undefined
+            const url = new URL(lastPage.next)
+            return Number(url.searchParams.get('page'))
+        },
+        staleTime: Infinity,
+        cacheTime: Infinity,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        retry: 2
+    })
 
-    useEffect(() => {
-        const request = new Request("https://jsonplaceholder.typicode.com/posts")
-
-        setLoading(true)
-        fetch(request)
-            .then((response) => response.json())
-            .then((json) => {
-                setPosts(json);
-                setLoading(false)
-            })
-            .catch(err => {
-                setError(err.toString());
-                setLoading(false)
-            })
-    }, [])
-
-    return {
-        posts, error, loading
-    }
 }
 
 export default usePosts;

@@ -46,7 +46,7 @@ export async function postRegister(firstName, lastName, nick, email, password) {
         })
     }
 
-    const response = await fetch(`http://127.0.0.1:8000/api/register/`, request)
+    const response = await fetch(`/api/register/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -96,6 +96,47 @@ export async function getOfficialMatches(teamId, status, page = 1){
     }
 
     const response = await fetch(`https://api.pandascore.co/lol/matches?filter[opponent_id]=${teamId}&filter[status]=${status}&page[number]=${page}&page[size]=5`, request)
+
+    if(!response.ok){
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function postNewsletter(email, token){
+
+    const request = {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            "email": email
+        })
+    }
+
+    const response = await fetch(`/api/newsletter/`, request)
+
+    if(!response.ok){
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function getPosts(page = 1){
+    const response = await fetch(`/api/posts/?page=${page}`)
 
     if(!response.ok){
         const errorData = await response.json()
