@@ -83,7 +83,7 @@ export async function postLogin(nick, password) {
         throw error
     }
 
-    return response
+    return response.json()
 }
 
 export async function getOfficialMatches(teamId, status, page = 1){

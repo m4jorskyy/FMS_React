@@ -15,6 +15,8 @@ import Highlights from "./pages/Highlights.jsx";
 import Layout from "./Layout.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 
 function App() {
     return (
@@ -32,6 +34,11 @@ function App() {
                 <Route path={"/contact"} element={<Contact/>}/>
                 <Route path={"/login"} element={<Login/>}/>
                 <Route path={"/register"} element={<Register/>}/>
+                <Route path={"/dashboard"} element={
+                    <ProtectedRoute>
+                        <Dashboard/>
+                    </ProtectedRoute>
+                }/>
             </Route>
         </Routes>
     )

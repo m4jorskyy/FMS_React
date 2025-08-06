@@ -8,7 +8,7 @@ export default function LoginForm() {
         showAlert,
         success,
         error,
-        handleSubmit,
+        handleLogin,
         handleNickChange,
         handlePasswordChange
     } = useLogin()
@@ -21,20 +21,20 @@ export default function LoginForm() {
                 </div>
             ) : null}
 
-            <form className={"login-form"} onSubmit={handleSubmit}>
+            <form className={"login-form"} onSubmit={handleLogin}>
                 <h3>Zaloguj się!</h3>
 
                 <label>
                     Nick:
                     <input type={"text"} value={nick} onChange={handleNickChange} placeholder={"Nick"}/>
                 </label>
-                <br />
+                <br/>
 
                 <label>
                     Password:
                     <input type={"password"} value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 </label>
-                <br />
+                <br/>
                 <input type={"submit"} value={"Zaloguj sie"}/>
             </form>
 

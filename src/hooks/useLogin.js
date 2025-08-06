@@ -1,7 +1,9 @@
 //useLogin.js
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {postLogin} from "../services/api.js";
+import {useAuth} from "../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function useLogin() {
     const [nick, setNick] = useState("")
@@ -13,6 +15,9 @@ export default function useLogin() {
 
     const thanks = "Logowanie udane!"
 
+    const {login} = useAuth()
+    const navigate = useNavigate()
+
     const handleNickChange = (e) => {
         setNick(e.target.value)
         setError("")
@@ -23,7 +28,7 @@ export default function useLogin() {
         setError("")
     }
 
-    const handleSubmit = async (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault()
         setError("")
         setSuccess("")
@@ -32,12 +37,12 @@ export default function useLogin() {
 
         try {
             const response = await postLogin(nick, password)
-            if (response.ok) {
-                setSuccess(thanks)
-                setShowAlert(true)
-                setNick("")
-                setPassword("")
-            }
+            login(response.nick, response.token, response.role)
+            setSuccess(thanks)
+            setShowAlert(true)
+            setNick("")
+            setPassword("")
+
         } catch (error) {
             if (error.data) {
                 const errorMessages = Object.entries(error.data)
@@ -51,13 +56,22 @@ export default function useLogin() {
         } finally {
             setLoading(false)
         }
-
     }
+
+    useEffect(() => {
+    if (success) {
+        const timeout = setTimeout(() => {
+            navigate("/dashboard")
+        }, 2000)
+
+        return () => clearTimeout(timeout)
+    }
+}, [success, navigate])
 
     return {
         nick,
         password,
-        handleSubmit,
+        handleLogin,
         handlePasswordChange,
         handleNickChange,
         error,
