@@ -1,6 +1,6 @@
-//MatchCard.jsx
+//SoloqMatchCard.jsx
 
-export default function MatchCard({game_start, game_duration, summoner, kills, deaths, assists, lane, win}){
+export default function SoloqMatchCard({game_start, game_duration, summoner, kills, deaths, assists, lane, win, champion}){
     return (
         <div style={{
                 display: 'flex',
@@ -15,7 +15,7 @@ export default function MatchCard({game_start, game_duration, summoner, kills, d
             }}>
 
             <p>{game_start}, {game_duration}</p>
-            <p>{summoner}: {kills}/{deaths}/{assists}, {lane}, {win}</p>
+            <p>{summoner}: {kills}/{deaths}/{assists}, {champion}, {lane}, {win}</p>
         </div>
     )
 }

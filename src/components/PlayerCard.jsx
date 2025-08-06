@@ -1,7 +1,7 @@
 //PlayerCard.jsx
 
 import useSoloqMatches from "../hooks/useSoloqMatches.js";
-import MatchCard from "./MatchCard.jsx";
+import SoloqMatchCard from "./SoloqMatchCard.jsx";
 
 export default function PlayerCard({name, surname, nick, lane, champion, teamRole}) {
     const ddVersion = '15.12.1'
@@ -65,9 +65,9 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
                     }}>owner</p>}
             </div>
             {matchList.map(match => (
-                <MatchCard key={match.match.match_id} lane={match.lane} assists={match.assists} deaths={match.deaths}
-                           game_duration={match.match.game_duration} game_start={match.match.game_start}
-                           kills={match.kills} summoner={match.summoner} win={match.win}/>
+                <SoloqMatchCard key={match.match.match_id} lane={match.lane} assists={match.assists} deaths={match.deaths}
+                                game_duration={match.match.game_duration} game_start={match.match.game_start}
+                                kills={match.kills} summoner={match.summoner} win={match.win} champion={match.champion}/>
             ))}
 
             {hasNextPage && (

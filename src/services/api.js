@@ -3,7 +3,7 @@
 import Cookies from 'js-cookie'
 
 export async function getMatches(nick, page = 1) {
-    const response = await fetch(`/api/players/${nick}/matches?page=${page}`)
+    const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -84,4 +84,26 @@ export async function postLogin(nick, password) {
     }
 
     return response
+}
+
+export async function getOfficialMatches(teamId, status, page = 1){
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_PANDASCORE_API_KEY}`
+        }
+    }
+
+    const response = await fetch(`https://api.pandascore.co/lol/matches?filter[opponent_id]=${teamId}&filter[status]=${status}&page[number]=${page}&page[size]=5`, request)
+
+    if(!response.ok){
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
 }
