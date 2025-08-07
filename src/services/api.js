@@ -2,6 +2,28 @@
 
 import Cookies from 'js-cookie'
 
+export async function getUsers(token, page = 1){
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    const response = await fetch(`/api/users/?page=${page}`, request)
+
+    if(!response.ok){
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
 export async function getMatches(nick, page = 1) {
     const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
 
