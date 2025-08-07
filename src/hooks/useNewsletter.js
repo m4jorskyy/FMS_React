@@ -1,7 +1,6 @@
 //useNewsletter.js
 
 import {useState, useEffect} from 'react'
-import {useAuth} from "../context/AuthContext.jsx";
 import {postNewsletter} from "../services/api.js";
 
 export default function useNewsletter() {
@@ -10,7 +9,6 @@ export default function useNewsletter() {
     const [success, setSuccess] = useState('')
     const [showAlert, setShowAlert] = useState(true)
     const [loading, setLoading] = useState(false)
-    const {token} = useAuth()
 
 
     const handleChange = (e) => {
@@ -26,7 +24,7 @@ export default function useNewsletter() {
         setLoading(true)
 
         try {
-            await postNewsletter(email, token)
+            await postNewsletter(email)
             setSuccess(thanks)
             setShowAlert(true)
             setEmail("")

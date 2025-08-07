@@ -3,7 +3,7 @@
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {getUsers} from "../services/api.js";
 
-export default function useUsers(token){
+export default function useUsers(token, options = {}){
     return useInfiniteQuery({
         queryKey: ['users'],
         queryFn: ({pageParam} = 1) => getUsers(token, pageParam),
@@ -16,6 +16,8 @@ export default function useUsers(token){
         cacheTime: Infinity,
         refetchOnWindowFocus: false,
         refetchOnMount: false,
-        retry: 2
+        retry: 2,
+        enabled: options.enabled ?? true,
+        ...options
     })
 }

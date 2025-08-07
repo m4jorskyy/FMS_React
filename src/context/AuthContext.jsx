@@ -1,6 +1,7 @@
 //AuthContext.jsx
 
 import {createContext, useContext, useState} from "react";
+import {useQueryClient} from "@tanstack/react-query";
 
 const AuthContext = createContext(null)
 
@@ -32,6 +33,8 @@ export function AuthProvider({children}) {
         }
     })
 
+    const queryClient = useQueryClient()
+
     const login = (userData, accessToken, userRole) => {
         setUser(userData)
         setToken(accessToken)
@@ -39,6 +42,8 @@ export function AuthProvider({children}) {
         localStorage.setItem('user', JSON.stringify(userData))
         localStorage.setItem('token', JSON.stringify(accessToken))
         localStorage.setItem('role', JSON.stringify(userRole))
+
+        queryClient.invalidateQueries()
     }
 
     const logout = () => {
@@ -48,6 +53,8 @@ export function AuthProvider({children}) {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         localStorage.removeItem('role')
+
+        queryClient.clear()
     }
 
     return (

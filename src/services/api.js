@@ -24,6 +24,28 @@ export async function getUsers(token, page = 1){
     return response.json()
 }
 
+export async function deleteUser(nick, token){
+    const request = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    const response = await fetch(`/api/users/delete/${nick}/`, request)
+
+    if(!response.ok){
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
 export async function getMatches(nick, page = 1) {
     const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
 
@@ -130,14 +152,13 @@ export async function getOfficialMatches(teamId, status, page = 1){
     return response.json()
 }
 
-export async function postNewsletter(email, token){
+export async function postNewsletter(email){
 
     const request = {
         method: "POST",
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
             "email": email

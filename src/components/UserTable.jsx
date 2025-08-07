@@ -1,5 +1,6 @@
 import {useEffect, useMemo, useState} from "react";
 import {debounce} from 'lodash';
+import useDeleteUser from "../hooks/useDeleteUser.js";
 
 export default function UserTable({users}) {
     // Memoize user data to prevent unnecessary re-renders
@@ -64,6 +65,8 @@ export default function UserTable({users}) {
 
     const totalPages = Math.ceil(sortedAndFilteredUsers.length / pageSize)
 
+    const {error, success, loading, handleDelete} = useDeleteUser()
+
     // Reset page when filtering
     useEffect(() => {
         setCurrentPage(0)
@@ -89,34 +92,72 @@ export default function UserTable({users}) {
 
             <table>
                 <thead>
-                    <tr>
-                        <th
-                            onClick={() => setSorting([{
-                                id: 'first_name',
-                                desc: sorting[0]?.id === 'first_name' ? !sorting[0]?.desc : false
-                            }])}
-                            style={{cursor: 'pointer'}}
-                        >
-                            Imię {sorting[0]?.id === 'first_name' && (sorting[0]?.desc ? '↓' : '↑')}
-                        </th>
-                        <th
-                            onClick={() => setSorting([{
-                                id: 'last_name',
-                                desc: sorting[0]?.id === 'last_name' ? !sorting[0]?.desc : false
-                            }])}
-                            style={{cursor: 'pointer'}}
-                        >
-                            Nazwisko {sorting[0]?.id === 'last_name' && (sorting[0]?.desc ? '↓' : '↑')}
-                        </th>
-                    </tr>
+                <tr>
+                    <th
+                        onClick={() => setSorting([{
+                            id: 'first_name',
+                            desc: sorting[0]?.id === 'first_name' ? !sorting[0]?.desc : false
+                        }])}
+                        style={{cursor: 'pointer'}}
+                    >
+                        Imię {sorting[0]?.id === 'first_name' && (sorting[0]?.desc ? '↓' : '↑')}
+                    </th>
+                    <th
+                        onClick={() => setSorting([{
+                            id: 'last_name',
+                            desc: sorting[0]?.id === 'last_name' ? !sorting[0]?.desc : false
+                        }])}
+                        style={{cursor: 'pointer'}}
+                    >
+                        Nazwisko {sorting[0]?.id === 'last_name' && (sorting[0]?.desc ? '↓' : '↑')}
+                    </th>
+                    <th
+                        onClick={() => setSorting([{
+                            id: 'nick',
+                            desc: sorting[0]?.id === 'nick' ? !sorting[0]?.desc : false
+                        }])}
+                        style={{cursor: 'pointer'}}
+                    >
+                        Nick {sorting[0]?.id === 'nick' && (sorting[0]?.desc ? '↓' : '↑')}
+                    </th>
+                    <th
+                        onClick={() => setSorting([{
+                            id: 'email',
+                            desc: sorting[0]?.id === 'email' ? !sorting[0]?.desc : false
+                        }])}
+                        style={{cursor: 'pointer'}}
+                    >
+                        Email {sorting[0]?.id === 'email' && (sorting[0]?.desc ? '↓' : '↑')}
+                    </th>
+                    <th
+                        onClick={() => setSorting([{
+                            id: 'role',
+                            desc: sorting[0]?.id === 'role' ? !sorting[0]?.desc : false
+                        }])}
+                        style={{cursor: 'pointer'}}
+                    >
+                        Role {sorting[0]?.id === 'role' && (sorting[0]?.desc ? '↓' : '↑')}
+                    </th>
+                    <th>
+                        USUŃ
+                    </th>
+                    <th>
+                        EDYTUJ
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    {paginatedUsers.map((user, index) => (
-                        <tr key={user.id || index}>
-                            <td>{user.first_name}</td>
-                            <td>{user.last_name}</td>
-                        </tr>
-                    ))}
+                {paginatedUsers.map((user, index) => (
+                    <tr key={user.id || index}>
+                        <td>{user.first_name}</td>
+                        <td>{user.last_name}</td>
+                        <td>{user.nick}</td>
+                        <td>{user.email}</td>
+                        <td>{user.role}</td>
+                        <td><button onClick={() => handleDelete(user.nick)}></button></td>
+                        <td><button></button></td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
 

@@ -6,7 +6,9 @@ import UserTable from "../components/UserTable.jsx";
 
 export default function Dashboard() {
     const {user, role, token} = useAuth()
-    const {data: users} = useUsers(token)
+    const {data: users} = useUsers(token, {
+        enabled: role === "ADMIN"
+    })
 
     if (role === "ADMIN") return <UserTable users={users}/>
 
