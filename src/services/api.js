@@ -2,7 +2,7 @@
 
 import Cookies from 'js-cookie'
 
-export async function getUsers(token, page = 1){
+export async function getUser(nick, token) {
     const request = {
         method: "GET",
         headers: {
@@ -11,9 +11,9 @@ export async function getUsers(token, page = 1){
         }
     }
 
-    const response = await fetch(`/api/users/?page=${page}`, request)
+    const response = await fetch(`/api/users/${nick}/`, request)
 
-    if(!response.ok){
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
@@ -24,7 +24,29 @@ export async function getUsers(token, page = 1){
     return response.json()
 }
 
-export async function deleteUser(nick, token){
+export async function getUsers(token, page = 1) {
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    const response = await fetch(`/api/users/?page=${page}`, request)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function deleteUser(nick, token) {
     const request = {
         method: "DELETE",
         headers: {
@@ -35,7 +57,41 @@ export async function deleteUser(nick, token){
 
     const response = await fetch(`/api/users/delete/${nick}/`, request)
 
-    if(!response.ok){
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function patchUser(first_name, last_name, nick, email, password, token, prevNick) {
+    const body = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "nick": nick,
+        "email": email,
+    }
+
+    if(password){
+        body.password = password
+    }
+
+    const request = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(body)
+    }
+
+    const response = await fetch(`/api/users/edit/${prevNick}/`, request)
+
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
@@ -130,7 +186,7 @@ export async function postLogin(nick, password) {
     return response.json()
 }
 
-export async function getOfficialMatches(teamId, status, page = 1){
+export async function getOfficialMatches(teamId, status, page = 1) {
     const request = {
         method: "GET",
         headers: {
@@ -141,7 +197,7 @@ export async function getOfficialMatches(teamId, status, page = 1){
 
     const response = await fetch(`https://api.pandascore.co/lol/matches?filter[opponent_id]=${teamId}&filter[status]=${status}&page[number]=${page}&page[size]=5`, request)
 
-    if(!response.ok){
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
@@ -152,7 +208,7 @@ export async function getOfficialMatches(teamId, status, page = 1){
     return response.json()
 }
 
-export async function postNewsletter(email){
+export async function postNewsletter(email) {
 
     const request = {
         method: "POST",
@@ -167,7 +223,7 @@ export async function postNewsletter(email){
 
     const response = await fetch(`/api/newsletter/`, request)
 
-    if(!response.ok){
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status
@@ -178,10 +234,10 @@ export async function postNewsletter(email){
     return response.json()
 }
 
-export async function getPosts(page = 1){
+export async function getPosts(page = 1) {
     const response = await fetch(`/api/posts/?page=${page}`)
 
-    if(!response.ok){
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status

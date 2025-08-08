@@ -1,8 +1,9 @@
 import {useEffect, useMemo, useState} from "react";
 import {debounce} from 'lodash';
 import useDeleteUser from "../hooks/useDeleteUser.js";
+import EditUserForm from "./EditUserForm.jsx";
 
-export default function UserTable({users}) {
+export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNextPage, isLoading, error, token}) {
     // Memoize user data to prevent unnecessary re-renders
     const userPage = useMemo(() => {
         return users?.pages?.flatMap(page => page.results) || []
@@ -11,6 +12,18 @@ export default function UserTable({users}) {
     const [sorting, setSorting] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [debouncedSearch, setDebouncedSearch] = useState('')
+
+    const [localCurrentPage, setLocalCurrentPage] = useState(1)
+    const [localPageSize] = useState(5)
+
+    const [editingUser, setEditingUser] = useState(null)
+    const [showEditForm, setShowEditForm] = useState(false)
+
+    function handleEditClick(user) {
+        setEditingUser(user)
+        setShowEditForm(true)
+    }
+
 
     // Lodash debounced function
     const debouncedSetSearch = useMemo(
@@ -30,16 +43,38 @@ export default function UserTable({users}) {
         }
     }, [debouncedSetSearch])
 
-    // Local filtering (faster than TanStack Table)
+    // Local filtering
     const filteredUsers = useMemo(() => {
         if (!debouncedSearch.trim()) return userPage
 
         const search = debouncedSearch.toLowerCase()
         return userPage.filter(user =>
             user.first_name?.toLowerCase().includes(search) ||
-            user.last_name?.toLowerCase().includes(search)
+            user.last_name?.toLowerCase().includes(search) ||
+            user.nick?.toLowerCase().includes(search) ||
+            user.email?.toLowerCase().includes(search) ||
+            user.role?.toLowerCase().includes(search)
         )
     }, [userPage, debouncedSearch])
+
+    // Automatyczne ładowanie kolejnych stron
+    useEffect(() => {
+        const minRequiredResults = localPageSize * 3; // Trzymamy bufor 3 stron
+
+        const shouldAutoLoad =
+            hasNextPage &&
+            !isFetchNextPage &&
+            filteredUsers.length < minRequiredResults;
+
+        if (shouldAutoLoad) {
+            fetchNextPage();
+        }
+    }, [filteredUsers.length, hasNextPage, isFetchNextPage, localPageSize, fetchNextPage])
+
+    // Reset strony przy zmianie wyszukiwania
+    useEffect(() => {
+        setLocalCurrentPage(1)
+    }, [debouncedSearch])
 
     // Local sorting
     const sortedAndFilteredUsers = useMemo(() => {
@@ -55,29 +90,59 @@ export default function UserTable({users}) {
         })
     }, [filteredUsers, sorting])
 
-    // Local pagination
-    const [currentPage, setCurrentPage] = useState(0)
-    const pageSize = 5
     const paginatedUsers = useMemo(() => {
-        const start = currentPage * pageSize
-        return sortedAndFilteredUsers.slice(start, start + pageSize)
-    }, [sortedAndFilteredUsers, currentPage])
+        const startIndex = (localCurrentPage - 1) * localPageSize
+        const endIndex = startIndex + localPageSize
+        return sortedAndFilteredUsers.slice(startIndex, endIndex)
+    }, [sortedAndFilteredUsers, localCurrentPage, localPageSize])
 
-    const totalPages = Math.ceil(sortedAndFilteredUsers.length / pageSize)
+    const totalLocalPages = Math.ceil(sortedAndFilteredUsers.length / localPageSize)
 
-    const {error, success, loading, handleDelete} = useDeleteUser()
+    const {error: deleteUserError, success, loading, handleDelete} = useDeleteUser()
 
-    // Reset page when filtering
+    // Automatyczne resetowanie strony gdy aktualna strona jest większa niż dostępne strony
     useEffect(() => {
-        setCurrentPage(0)
-    }, [debouncedSearch])
+        if (localCurrentPage > totalLocalPages && totalLocalPages > 0) {
+            setLocalCurrentPage(totalLocalPages)
+        }
+    }, [localCurrentPage, totalLocalPages])
+
+    // Automatyczne ładowanie gdy zbliżamy się do końca dostępnych wyników
+    const handlePageChange = (newPage) => {
+        setLocalCurrentPage(newPage)
+
+        // Sprawdź czy zbliżamy się do końca i czy trzeba załadować więcej
+        const remainingPages = totalLocalPages - newPage
+        if (remainingPages <= 1 && hasNextPage && !isFetchNextPage) {
+            fetchNextPage()
+        }
+    }
+
+    function handleEditSuccess(newNick) {
+        setEditingUser(prev => ({
+            ...prev,
+            nick: newNick
+        }))
+    }
+
+    function handleCloseEditForm() {
+        setShowEditForm(false)
+        setEditingUser(null)
+    }
+
+
+    if (!userPage.length && isLoading) {
+        return <div>Ładowanie użytkowników...</div>
+    }
 
     if (!userPage.length) {
         return <div>Brak użytkowników do wyświetlenia</div>
     }
 
     return (
-        <div>
+        <div style={{
+            border: '2px solid red'
+        }}>
             <h1>Lista użytkowników</h1>
             <div>
                 <input
@@ -85,9 +150,6 @@ export default function UserTable({users}) {
                     onChange={e => setSearchTerm(e.target.value)}
                     placeholder="Szukaj użytkowników"
                 />
-                <div>
-                    Pokazuję {sortedAndFilteredUsers.length} z {userPage.length} użytkowników
-                </div>
             </div>
 
             <table>
@@ -154,29 +216,39 @@ export default function UserTable({users}) {
                         <td>{user.nick}</td>
                         <td>{user.email}</td>
                         <td>{user.role}</td>
-                        <td><button onClick={() => handleDelete(user.nick)}></button></td>
-                        <td><button></button></td>
+                        <td>
+                            <button onClick={() => handleDelete(user.nick)}>🗑️</button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleEditClick(user)}>✏️</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
 
-            {/* Pagination */}
             <div>
                 <button
-                    onClick={() => setCurrentPage(p => Math.max(0, p - 1))}
-                    disabled={currentPage === 0}
+                    onClick={() => handlePageChange(Math.max(1, localCurrentPage - 1))}
+                    disabled={localCurrentPage === 1}
                 >
-                    Poprzednia
+                    Poprzednia strona
                 </button>
-                <span> Strona {currentPage + 1} z {totalPages} </span>
+
+                <span>Strona {localCurrentPage} z {totalLocalPages}</span>
+
                 <button
-                    onClick={() => setCurrentPage(p => Math.min(totalPages - 1, p + 1))}
-                    disabled={currentPage >= totalPages - 1}
+                    onClick={() => handlePageChange(Math.min(totalLocalPages, localCurrentPage + 1))}
+                    disabled={localCurrentPage === totalLocalPages}
                 >
-                    Następna
+                    Następna strona
                 </button>
             </div>
+
+            {showEditForm && editingUser && (
+                <EditUserForm user={editingUser} token={token} onSuccess={handleEditSuccess} onClose={handleCloseEditForm}/>
+            )}
+
         </div>
     )
 }
