@@ -103,7 +103,7 @@ export async function patchUser(first_name, last_name, nick, email, password, to
 }
 
 export async function getMatches(nick, page = 1) {
-    const response = await fetch(`/api/players/${nick}/matches/?page=${page}`)
+    const response = await fetch(`/api/players/matches/${nick}/?page=${page}`)
 
     if (!response.ok) {
         const errorData = await response.json()

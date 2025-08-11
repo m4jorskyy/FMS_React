@@ -12,51 +12,57 @@ export default function Roster() {
     const subs = players.filter(p => p.team_role === 'Sub')
 
     return (
-        <>
-            <img
-                src={"/src/assets/logo.png"}
-                alt={"logo"}
-            />
-
-            {starters.length ? (
-                <div>
-                    <h2>Starters</h2>
-                    <div>
-                        {starters.map(starter => (
-                            <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
-                                        nick={starter.nick}
-                                        teamRole={starter.team_role} champion={starter.champion} lane={starter.lane}
-                            />
-                        ))}
-                    </div>
+        <div className={"flex flex-col items-center w-full h-screen overflow-y-auto"}>
+            {loading ? (
+                <div className={"animate-l1"}>
+                    <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
                 </div>
             ) : null}
 
-            {coaches.length ? (
-                <div>
-                    <h2>Coaches</h2>
-                    <div>
-                        {coaches.map(coach => (
-                            <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
-                                        nick={coach.nick}
-                                        teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
-                        ))}
+            <div className="w-full">
+                {starters.length ? (
+                    <div className={"flex flex-col items-center"}>
+                        <h1>Starters</h1>
+                        <div className={"flex flex-row gap-2 overflow-x-scroll w-full"}>
+                            {starters.map(starter => (
+                                <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
+                                            nick={starter.nick}
+                                            teamRole={starter.team_role} champion={starter.champion} lane={starter.lane}
+                                />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ) : null}
+                ) : null}
 
-            {subs.length ? (
-                <div>
-                    <h2>Subs</h2>
+                <br/>
+
+                {coaches.length ? (
                     <div>
-                        <br/>
-                        {subs.map(sub => (
-                            <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
-                                        teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
-                        ))}
+                        <h2>Coaches</h2>
+                        <div>
+                            {coaches.map(coach => (
+                                <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
+                                            nick={coach.nick}
+                                            teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ) : null}
-        </>
+                ) : null}
+
+                <br/>
+
+                {subs.length ? (
+                    <div className={"flex flex-col items-center"}>
+                        <h2>Subs</h2>
+                        <div className={"flex flex-row items-center justify-center gap-2"}>
+                            {subs.map(sub => (
+                                <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
+                                            teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
+                            ))}
+                        </div>
+                    </div>
+                ) : null}
+            </div>
+        </div>
     );
 }

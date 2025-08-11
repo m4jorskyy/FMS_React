@@ -19,7 +19,8 @@ export default function Layout() {
                     <div className={"flex flex-row w-screen justify-between p-3"}>
                         <button onClick={() => setOpen(!open)} className={"cursor-pointer"}>
                             <div className="grid place-items-center w-6 h-6">
-                                <span className={`transition-opacity duration-300 col-start-1 row-start-1 ${open ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+                                <span
+                                    className={`transition-opacity duration-300 col-start-1 row-start-1 ${open ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                                     <AlignJustify/>
                                 </span>
 
@@ -29,9 +30,11 @@ export default function Layout() {
                                 </span>
                             </div>
                         </button>
+
+                        <img src={"/src/assets/logo.png"} alt={"Logo"} className={"absolute w-10 h-10 left-49 top-1"}/>
+
                         {user ? (
-                            <div>
-                                <span className={"mr-2"}>Hello, {user}!</span>
+                            <div className={"items-center"}>
                                 <button
                                     onClick={handleLogout}
                                     disabled={loading}
@@ -41,7 +44,7 @@ export default function Layout() {
                                 </button>
                             </div>
                         ) : (
-                            <div className={`flex flex-row justify-between ${open ? "mr-4" : ""}`}>
+                            <div className={`flex flex-row justify-between items-center ${open ? "mr-4" : ""}`}>
                                 <Link to={"/login"} className={"mr-2"} onClick={() => setOpen(false)}>Log in</Link>
                                 <Link to={"/register"} onClick={() => setOpen(false)}>Sign up</Link>
                             </div>
@@ -49,7 +52,7 @@ export default function Layout() {
                     </div>
                     {open && (
                         <>
-                            <Link className={"navbar-links"} to={"/"} onClick={() => setOpen(!open)}>Home</Link>
+                        <Link className={"navbar-links"} to={"/"} onClick={() => setOpen(!open)}>Home</Link>
                             <Link className={"navbar-links"} to={"/roster"} onClick={() => setOpen(!open)}>Roster</Link>
                             <Link className={"navbar-links"} to={"/about"} onClick={() => setOpen(!open)}>About</Link>
                             <Link className={"navbar-links"} to={"/matches"}

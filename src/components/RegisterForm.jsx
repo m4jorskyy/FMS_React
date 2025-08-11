@@ -2,7 +2,7 @@
 
 import useRegister from "../hooks/useRegister.js";
 
-export default function RegisterForm(){
+export default function RegisterForm() {
     const {
         firstName,
         lastName,
@@ -33,80 +33,78 @@ export default function RegisterForm(){
                         ×
                     </button>
                 </div>
-            ) : null }
+            ) : null}
 
-            <form onSubmit={handleSubmit}>
-                <h3>Zarejestruj się!</h3>
+            <form onSubmit={handleSubmit} className={"flex flex-col items-center"}>
+                <h1>REGISTER</h1>
+                <br />
+                <input
+                    type="text"
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                    required
+                    disabled={loading}
+                    placeholder={"first name"}
+                    className={"placeholder: text-center"}
+                />
 
-                <label>
-                    Imię:
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={handleFirstNameChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
+                <input
+                    type="text"
+                    value={lastName}
+                    onChange={handleLastNameChange}
+                    required
+                    disabled={loading}
+                    placeholder={"last name"}
+                    className={"placeholder: text-center"}
+                />
 
-                <label>
-                    Nazwisko
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={handleLastNameChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Email
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Nick
-                    <input
-                        type="text"
-                        value={nick}
-                        onChange={handleNickChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Hasło
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Powtórz hasło
-                    <input
-                        type="password"
-                        value={passwordCheck}
-                        onChange={handlePasswordCheckChange}
-                        required
-                        disabled={loading}
-                    />
-                </label>
-                <br/>
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Rejestracja...' : 'Zarejestruj się'}
+
+
+                <input
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    required
+                    disabled={loading}
+                    placeholder={"email"}
+                    className={"placeholder: text-center"}
+                />
+
+
+
+                <input
+                    type="text"
+                    value={nick}
+                    onChange={handleNickChange}
+                    required
+                    disabled={loading}
+                    placeholder={"nick"}
+                    className={"placeholder: text-center"}
+                />
+
+                <input
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    required
+                    disabled={loading}
+                    placeholder={"password"}
+                    className={"placeholder: text-center"}
+                />
+
+                <input
+                    type="password"
+                    value={passwordCheck}
+                    onChange={handlePasswordCheckChange}
+                    required
+                    disabled={loading}
+                    placeholder={"Password check"}
+                    className={"placeholder: text-center"}
+                />
+                <br />
+
+                <button type="submit" disabled={loading} className={"cursor-pointer"}>
+                    {loading ? '' : 'Register'}
                 </button>
             </form>
         </div>

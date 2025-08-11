@@ -7,8 +7,6 @@
 @font-face {
     font-family: 'RustyAttack';
     src: url("./assets/fonts/RustyAttack.otf") format('opentype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 @theme {

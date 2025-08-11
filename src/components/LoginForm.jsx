@@ -29,11 +29,13 @@ export default function LoginForm() {
 
             <form onSubmit={handleLogin} className={"flex flex-col items-center"}>
                 <h3>LOG IN</h3>
+                <br />
                 <input className={"text-center placeholder:text-center"} name={"nick"} type={"text"} value={nick}
                        onChange={handleNickChange} placeholder={"Nick"}/>
                 <input className={"text-center placeholder:text-center"} name={"password"} type={"password"}
                        value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
-                <input type={"submit"} value={"LOG IN"}/>
+                <br />
+                <button type={"submit"}>LOG IN</button>
             </form>
 
         </>

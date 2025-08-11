@@ -2,6 +2,7 @@ import {useEffect, useMemo, useState} from "react";
 import {debounce} from 'lodash';
 import useDeleteUser from "../hooks/useDeleteUser.js";
 import EditUserForm from "./EditUserForm.jsx";
+import { Trash2, Pencil } from 'lucide-react';
 
 export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNextPage, isLoading, error, token}) {
     // Memoize user data to prevent unnecessary re-renders
@@ -144,25 +145,26 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
     }
 
     return (
-        <div>
+        <div className={"flex flex-col items-center gap-2"}>
             <h1>User Table</h1>
             <div>
                 <input
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
-                    placeholder="Search users..."
+                    placeholder="Search users"
+                    className={"placeholder: text-center outline-0"}
                 />
             </div>
 
-            <table>
+            <table className={"border-2 border-dashed border-collapse text-center"}>
                 <thead>
-                <tr>
+                <tr className={"border-2 border-dashed"}>
                     <th
                         onClick={() => setSorting([{
                             id: 'first_name',
                             desc: sorting[0]?.id === 'first_name' ? !sorting[0]?.desc : false
                         }])}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer border-2 border-dashed  p-2"}
                     >
                         First name {sorting[0]?.id === 'first_name' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
@@ -171,7 +173,7 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'last_name',
                             desc: sorting[0]?.id === 'last_name' ? !sorting[0]?.desc : false
                         }])}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer border-2 border-dashed border-collapse p-2"}
                     >
                         Last name {sorting[0]?.id === 'last_name' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
@@ -180,7 +182,7 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'nick',
                             desc: sorting[0]?.id === 'nick' ? !sorting[0]?.desc : false
                         }])}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer border-2 border-dashed border-collapse p-2"}
                     >
                         Nick {sorting[0]?.id === 'nick' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
@@ -189,7 +191,7 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'email',
                             desc: sorting[0]?.id === 'email' ? !sorting[0]?.desc : false
                         }])}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer border-2 border-dashed border-collapse p-2"}
                     >
                         E-mail {sorting[0]?.id === 'email' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
@@ -198,14 +200,14 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'role',
                             desc: sorting[0]?.id === 'role' ? !sorting[0]?.desc : false
                         }])}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer  p-2"}
                     >
                         Role {sorting[0]?.id === 'role' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
-                    <th>
+                    <th className={"border-2 border-dashed border-collapse p-2"}>
                         DELETE
                     </th>
-                    <th>
+                    <th className={" p-2"}>
                         EDIT
                     </th>
                 </tr>
@@ -213,16 +215,16 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                 <tbody>
                 {paginatedUsers.map((user, index) => (
                     <tr key={user.id || index}>
-                        <td>{user.first_name}</td>
-                        <td>{user.last_name}</td>
-                        <td>{user.nick}</td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                        <td>
-                            <button onClick={() => handleDelete(user.nick)} className={"cursor-pointer"}>🗑️</button>
+                        <td className={"border-2 border-dashed p-2"}>{user.first_name}</td>
+                        <td className={"border-2 border-dashed p-2"}>{user.last_name}</td>
+                        <td className={"border-2 border-dashed p-2"}>{user.nick}</td>
+                        <td className={"border-2 border-dashed p-2"}>{user.email}</td>
+                        <td className={"border-2 border-dashed p-2"}>{user.role}</td>
+                        <td className={"border-2 border-dashed p-2"}>
+                            <button onClick={() => handleDelete(user.nick)} className={"cursor-pointer"}><Trash2 /></button>
                         </td>
-                        <td>
-                            <button onClick={() => handleEditClick(user)} className={"cursor-pointer"}>✏️</button>
+                        <td className={"border-2 border-dashed border-collapse p-2"}>
+                            <button onClick={() => handleEditClick(user)} className={"cursor-pointer"}><Pencil/></button>
                         </td>
                     </tr>
                 ))}
@@ -233,15 +235,17 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                 <button
                     onClick={() => handlePageChange(Math.max(1, localCurrentPage - 1))}
                     disabled={localCurrentPage === 1}
+                    className={"border-2 rounded-lg p-2"}
                 >
                     Previous page
                 </button>
 
-                <span>Page {localCurrentPage} of {totalLocalPages}</span>
+                <span> Page {localCurrentPage} of {totalLocalPages} </span>
 
                 <button
                     onClick={() => handlePageChange(Math.min(totalLocalPages, localCurrentPage + 1))}
                     disabled={localCurrentPage === totalLocalPages}
+                    className={"border-2 rounded-lg p-2"}
                 >
                     Next page
                 </button>

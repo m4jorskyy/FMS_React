@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react";
 import {postRegister} from "../services/api.js";
+import {useNavigate} from "react-router-dom";
 
 export default function useRegister() {
     const [firstName, setFirstName] = useState("")
@@ -14,6 +15,8 @@ export default function useRegister() {
     const [success, setSuccess] = useState("")
     const [loading, setLoading] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
+
+    const navigate=useNavigate()
 
     const thanks = "Dziękujemy za rejestrację!"
 
@@ -98,7 +101,10 @@ export default function useRegister() {
 
     useEffect(() => {
         if (success) {
-            const timer = setTimeout(() => handleClose(), 3000)
+            const timer = setTimeout(() => {
+                handleClose()
+                navigate("/login")
+            }, 2000)
             return () => clearTimeout(timer)
         }
     }, [success])

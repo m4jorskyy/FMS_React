@@ -19,29 +19,32 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
     const matchList = data?.pages.flatMap(page => page.results) || []
 
     return (
-        <div>
-            <div>
+        <div className={"flex flex-col items-center border-2 rounded-lg p-4"}>
+            <>
                 <h3>{name} "{nick}" {surname}</h3>
                 <p>{lane}</p>
+                <br />
                 <img
                     src={`/src/assets/teamPhotos/${nick}.jpg`}
                     alt={nick}
+                    className={"w-50 h-50 rounded-[50%] object-cover"}
                 />
-                <p>
-                    Main:
-                    <br/>
-                    <img
-                        src={champImgUrl}
-                        alt={champion}
-                    />
-                </p>
+                <br/>
 
-                {teamRole === "Captain" && <p>owner</p>}
-            </div>
+                Main:
+                <img
+                    src={champImgUrl}
+                    alt={champion}
+                />
+                {teamRole === "Captain" && <p className={"text-[#ffd700]"}>owner</p>}
+            </>
+            <p>Recent matches</p>
             {matchList.map(match => (
-                <SoloqMatchCard key={match.match.match_id} lane={match.lane} assists={match.assists} deaths={match.deaths}
+                <SoloqMatchCard key={match.match.match_id} lane={match.lane} assists={match.assists}
+                                deaths={match.deaths}
                                 game_duration={match.match.game_duration} game_start={match.match.game_start}
-                                kills={match.kills} summoner={match.summoner} win={match.win} champion={match.champion}/>
+                                kills={match.kills} summoner={match.summoner} win={match.win}
+                                champion={match.champion}/>
             ))}
 
             {hasNextPage && (
@@ -49,7 +52,7 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
                     onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
                 >
-                    {isFetchingNextPage ? 'Ładowanie…' : 'Pokaż więcej'}
+                    {isFetchingNextPage ? 'Loading...' : 'Load more'}
                 </button>
             )}
 
