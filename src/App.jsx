@@ -18,7 +18,7 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 
-function App() {
+export default function App() {
     return (
         <Routes>
             <Route path={"/"} element={<Layout/>}>
@@ -43,5 +43,3 @@ function App() {
         </Routes>
     )
 }
-
-export default App;

@@ -3,54 +3,74 @@
 import {Outlet, Link} from 'react-router-dom';
 import {useAuth} from "./context/AuthContext.jsx";
 import useLogout from "./hooks/useLogout.js";
+import {useState} from "react";
+import {AlignJustify, X} from "lucide-react";
 
 export default function Layout() {
-    const { user } = useAuth()
-    const { handleLogout, loading } = useLogout()
+    const {user} = useAuth()
+    const {handleLogout, loading} = useLogout()
+
+    const [open, setOpen] = useState(false)
 
     return (
         <>
-            <header className={"app-header"}>
-                <nav style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    justifyContent: 'center',
-                }}>
-                    <Link to={"/"}>Home</Link>
-                    <Link to={"/roster"}>Roster</Link>
-                    <Link to={"/about"}>About</Link>
-                    <Link to={"/matches"}>Matches</Link>
-                    <Link to={"/sponsors"}>Sponsors</Link>
-                    <Link to={"/gallery"}>Gallery</Link>
-                    <Link to={"/news"}>News</Link>
-                    <Link to={"/stats"}>Stats</Link>
-                    <Link to={"/highlights"}>Highlights</Link>
-                    <Link to={"/contact"}>Contact</Link>
-                    <Link to={"/dashboard"}>Dashboard</Link>
+            <header>
+                <nav className={"flex flex-col overflow-x-hidden flex-wrap items-center justify-center"}>
+                    <div className={"flex flex-row w-screen justify-between p-3"}>
+                        <button onClick={() => setOpen(!open)} className={"cursor-pointer"}>
+                            <div className="grid place-items-center w-6 h-6">
+                                <span className={`transition-opacity duration-300 col-start-1 row-start-1 ${open ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+                                    <AlignJustify/>
+                                </span>
 
-                    <div className="user-section">
+                                <span
+                                    className={`transition-opacity duration-300 col-start-1 row-start-1 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                                    <X/>
+                                </span>
+                            </div>
+                        </button>
                         {user ? (
-                            <div className="logged-in">
-                                <span>Witaj, {user}!</span>
+                            <div>
+                                <span className={"mr-2"}>Hello, {user}!</span>
                                 <button
                                     onClick={handleLogout}
                                     disabled={loading}
-                                    className="logout-btn"
+                                    className={"rounded-lg border-2 p-2"}
                                 >
-                                    {loading ? "Ładowanie" : "Wyloguj"}
+                                    {loading ? "Loading..." : "Log out"}
                                 </button>
                             </div>
                         ) : (
-                            <div className="logged-out">
-                                <Link to={"/login"}>Zaloguj się </Link>
-                                <Link to={"/register"}>Zarejestruj się</Link>
+                            <div className={`flex flex-row justify-between ${open ? "mr-4" : ""}`}>
+                                <Link to={"/login"} className={"mr-2"} onClick={() => setOpen(false)}>Log in</Link>
+                                <Link to={"/register"} onClick={() => setOpen(false)}>Sign up</Link>
                             </div>
                         )}
                     </div>
+                    {open && (
+                        <>
+                            <Link className={"navbar-links"} to={"/"} onClick={() => setOpen(!open)}>Home</Link>
+                            <Link className={"navbar-links"} to={"/roster"} onClick={() => setOpen(!open)}>Roster</Link>
+                            <Link className={"navbar-links"} to={"/about"} onClick={() => setOpen(!open)}>About</Link>
+                            <Link className={"navbar-links"} to={"/matches"}
+                                  onClick={() => setOpen(!open)}>Matches</Link>
+                            <Link className={"navbar-links"} to={"/sponsors"}
+                                  onClick={() => setOpen(!open)}>Sponsors</Link>
+                            <Link className={"navbar-links"} to={"/gallery"}
+                                  onClick={() => setOpen(!open)}>Gallery</Link>
+                            <Link className={"navbar-links"} to={"/news"} onClick={() => setOpen(!open)}>News</Link>
+                            <Link className={"navbar-links"} to={"/stats"} onClick={() => setOpen(!open)}>Stats</Link>
+                            <Link className={"navbar-links"} to={"/highlights"}
+                                  onClick={() => setOpen(!open)}>Highlights</Link>
+                            <Link className={"navbar-links"} to={"/contact"}
+                                  onClick={() => setOpen(!open)}>Contact</Link>
+                            <Link className={"navbar-links"} to={"/dashboard"}
+                                  onClick={() => setOpen(!open)}>Dashboard</Link>
+                        </>
+                    )}
                 </nav>
-
             </header>
-            <main style={{padding: '1rem'}}>
+            <main className={"flex flex-col justify-center items-center overflow-hidden"}>
                 <Outlet/>
             </main>
         </>

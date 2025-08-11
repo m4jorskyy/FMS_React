@@ -9,7 +9,7 @@ export default function News() {
 
     const postPages = posts?.pages.flatMap(page => page.results) || []
     return (
-        <div className={"news"}>
+        <div>
             <h1>News</h1>
             <NewsletterForm/>
 

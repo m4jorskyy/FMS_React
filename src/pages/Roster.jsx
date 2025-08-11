@@ -12,20 +12,16 @@ export default function Roster() {
     const subs = players.filter(p => p.team_role === 'Sub')
 
     return (
-        <div className="roster">
+        <>
             <img
                 src={"/src/assets/logo.png"}
                 alt={"logo"}
-                style={{
-                    height: "100px",
-                    width: "100px",
-                }}
             />
 
             {starters.length ? (
                 <div>
                     <h2>Starters</h2>
-                    <div className="starters">
+                    <div>
                         {starters.map(starter => (
                             <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
                                         nick={starter.nick}
@@ -39,7 +35,7 @@ export default function Roster() {
             {coaches.length ? (
                 <div>
                     <h2>Coaches</h2>
-                    <div className="coaches">
+                    <div>
                         {coaches.map(coach => (
                             <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
                                         nick={coach.nick}
@@ -52,7 +48,7 @@ export default function Roster() {
             {subs.length ? (
                 <div>
                     <h2>Subs</h2>
-                    <div className="subs">
+                    <div>
                         <br/>
                         {subs.map(sub => (
                             <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
@@ -61,8 +57,6 @@ export default function Roster() {
                     </div>
                 </div>
             ) : null}
-
-
-        </div>
+        </>
     );
 }

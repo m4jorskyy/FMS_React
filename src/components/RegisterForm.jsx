@@ -24,29 +24,18 @@ export default function RegisterForm(){
         handlePasswordCheckChange
     } = useRegister()
 
-    const alertStyle = {
-        backgroundColor: '#333',
-        color: 'white',
-        padding: '1rem',
-        borderRadius: '8px',
-        position: 'relative',
-        margin: '1rem 0',
-        width: '300px',
-        height: error ? '225px' : '175px'
-    }
-
     return (
-        <div className="register-form-container">
+        <div>
             {showAlert ? (
-                <div className={`alert ${error ? 'alert--error' : 'alert--success'}`}>
+                <div>
                     <p>{error || success}</p>
-                    <button className="alert__close" onClick={handleClose} aria-label="Close">
+                    <button onClick={handleClose}>
                         ×
                     </button>
                 </div>
             ) : null }
 
-            <form className="register-form" onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit}>
                 <h3>Zarejestruj się!</h3>
 
                 <label>
@@ -116,7 +105,7 @@ export default function RegisterForm(){
                     />
                 </label>
                 <br/>
-                <button type="submit" disabled={loading} className="btn-submit">
+                <button type="submit" disabled={loading}>
                     {loading ? 'Rejestracja...' : 'Zarejestruj się'}
                 </button>
             </form>

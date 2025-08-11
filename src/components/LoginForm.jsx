@@ -14,30 +14,28 @@ export default function LoginForm() {
     } = useLogin()
 
     return (
-        <div className={"login-form-containter"}>
+        <>
             {showAlert ? (
-                <div className={`alert ${error ? 'alert--error' : 'alert--success'}`}>
+                <div>
                     <p>{error || success}</p>
                 </div>
             ) : null}
 
-            <form className={"login-form"} onSubmit={handleLogin}>
-                <h3>Zaloguj się!</h3>
+            {loading ? (
+                <div className={"animate-l1"}>
+                    <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                </div>
+            ) : null}
 
-                <label>
-                    Nick:
-                    <input type={"text"} value={nick} onChange={handleNickChange} placeholder={"Nick"}/>
-                </label>
-                <br/>
-
-                <label>
-                    Password:
-                    <input type={"password"} value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
-                </label>
-                <br/>
-                <input type={"submit"} value={"Zaloguj sie"}/>
+            <form onSubmit={handleLogin} className={"flex flex-col items-center"}>
+                <h3>LOG IN</h3>
+                <input className={"text-center placeholder:text-center"} name={"nick"} type={"text"} value={nick}
+                       onChange={handleNickChange} placeholder={"Nick"}/>
+                <input className={"text-center placeholder:text-center"} name={"password"} type={"password"}
+                       value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
+                <input type={"submit"} value={"LOG IN"}/>
             </form>
 
-        </div>
+        </>
     )
 }

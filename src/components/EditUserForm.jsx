@@ -49,9 +49,9 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
     return (
         <>
             {showAlert ? (
-                <div className={`alert ${error ? 'alert--error' : 'alert--success'}`}>
+                <div>
                     <p>{error || success}</p>
-                    <button className="alert__close" onClick={handleClose} aria-label="Close">
+                    <button onClick={handleClose}>
                         ×
                     </button>
                 </div>
@@ -61,7 +61,6 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
                 <button
                     type="button"
                     onClick={onClose}
-                    style={{float: 'right', background: 'red', color: 'white'}}
                 >
                     ✕ Zamknij
                 </button>
@@ -130,7 +129,7 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
                     />
                 </label>
                 <br/>
-                <button type="submit" disabled={loading} className="btn-submit">
+                <button type="submit" disabled={loading}>
                     {loading ? 'Zapisywanie zmian...' : 'Zapisz zmiany'}
                 </button>
             </form>

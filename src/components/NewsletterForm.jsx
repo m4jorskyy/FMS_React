@@ -12,22 +12,11 @@ export default function NewsletterForm() {
         handleClose
     } = useNewsletter();
 
-    const alertStyle = {
-        backgroundColor: '#333',
-        color: 'white',
-        padding: '1rem',
-        borderRadius: '8px',
-        position: 'relative',
-        margin: '1rem 0',
-        width: '300px',
-        height: error ? '225px' : '175px'
-    }
-
     return (
         <>
             {showAlert && (
-                <div style={alertStyle}>
-                    <span className={"closebtn"} onClick={handleClose}>&times;</span>
+                <div>
+                    <span onClick={handleClose}>&times;</span>
                     <form onSubmit={handleSubmit}>
                         <h3>Zapisz się do newslettera!</h3>
                         <input type={"email"} value={email} onChange={handleChange} placeholder={"E-mail"}/>

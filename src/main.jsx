@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             staleTime: Infinity,           // nigdy nie przeterminowuje danych
-            cacheTime: Infinity,           // trzyma cache dopóki działa appka
+            cacheTime: Infinity,           // trzyma cache dopóki działa apka
             refetchOnWindowFocus: false,   // nie fetchuje po powrocie okna
             refetchOnReconnect: false,     // nie fetchuje po przywróceniu sieci
             refetchOnMount: false,         // nie fetchuje przy remoncie komponentu

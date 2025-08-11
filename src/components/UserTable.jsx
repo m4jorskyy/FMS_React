@@ -132,23 +132,25 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
 
 
     if (!userPage.length && isLoading) {
-        return <div>Ładowanie użytkowników...</div>
+        return (
+            <div className={"animate-l1"}>
+                <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+            </div>
+        )
     }
 
     if (!userPage.length) {
-        return <div>Brak użytkowników do wyświetlenia</div>
+        return <div>No users to show</div>
     }
 
     return (
-        <div style={{
-            border: '2px solid red'
-        }}>
-            <h1>Lista użytkowników</h1>
+        <div>
+            <h1>User Table</h1>
             <div>
                 <input
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
-                    placeholder="Szukaj użytkowników"
+                    placeholder="Search users..."
                 />
             </div>
 
@@ -160,25 +162,25 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'first_name',
                             desc: sorting[0]?.id === 'first_name' ? !sorting[0]?.desc : false
                         }])}
-                        style={{cursor: 'pointer'}}
+                        className={"cursor-pointer"}
                     >
-                        Imię {sorting[0]?.id === 'first_name' && (sorting[0]?.desc ? '↓' : '↑')}
+                        First name {sorting[0]?.id === 'first_name' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
                     <th
                         onClick={() => setSorting([{
                             id: 'last_name',
                             desc: sorting[0]?.id === 'last_name' ? !sorting[0]?.desc : false
                         }])}
-                        style={{cursor: 'pointer'}}
+                        className={"cursor-pointer"}
                     >
-                        Nazwisko {sorting[0]?.id === 'last_name' && (sorting[0]?.desc ? '↓' : '↑')}
+                        Last name {sorting[0]?.id === 'last_name' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
                     <th
                         onClick={() => setSorting([{
                             id: 'nick',
                             desc: sorting[0]?.id === 'nick' ? !sorting[0]?.desc : false
                         }])}
-                        style={{cursor: 'pointer'}}
+                        className={"cursor-pointer"}
                     >
                         Nick {sorting[0]?.id === 'nick' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
@@ -187,24 +189,24 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                             id: 'email',
                             desc: sorting[0]?.id === 'email' ? !sorting[0]?.desc : false
                         }])}
-                        style={{cursor: 'pointer'}}
+                        className={"cursor-pointer"}
                     >
-                        Email {sorting[0]?.id === 'email' && (sorting[0]?.desc ? '↓' : '↑')}
+                        E-mail {sorting[0]?.id === 'email' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
                     <th
                         onClick={() => setSorting([{
                             id: 'role',
                             desc: sorting[0]?.id === 'role' ? !sorting[0]?.desc : false
                         }])}
-                        style={{cursor: 'pointer'}}
+                        className={"cursor-pointer"}
                     >
                         Role {sorting[0]?.id === 'role' && (sorting[0]?.desc ? '↓' : '↑')}
                     </th>
                     <th>
-                        USUŃ
+                        DELETE
                     </th>
                     <th>
-                        EDYTUJ
+                        EDIT
                     </th>
                 </tr>
                 </thead>
@@ -217,10 +219,10 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                         <td>{user.email}</td>
                         <td>{user.role}</td>
                         <td>
-                            <button onClick={() => handleDelete(user.nick)}>🗑️</button>
+                            <button onClick={() => handleDelete(user.nick)} className={"cursor-pointer"}>🗑️</button>
                         </td>
                         <td>
-                            <button onClick={() => handleEditClick(user)}>✏️</button>
+                            <button onClick={() => handleEditClick(user)} className={"cursor-pointer"}>✏️</button>
                         </td>
                     </tr>
                 ))}
@@ -232,21 +234,22 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
                     onClick={() => handlePageChange(Math.max(1, localCurrentPage - 1))}
                     disabled={localCurrentPage === 1}
                 >
-                    Poprzednia strona
+                    Previous page
                 </button>
 
-                <span>Strona {localCurrentPage} z {totalLocalPages}</span>
+                <span>Page {localCurrentPage} of {totalLocalPages}</span>
 
                 <button
                     onClick={() => handlePageChange(Math.min(totalLocalPages, localCurrentPage + 1))}
                     disabled={localCurrentPage === totalLocalPages}
                 >
-                    Następna strona
+                    Next page
                 </button>
             </div>
 
             {showEditForm && editingUser && (
-                <EditUserForm user={editingUser} token={token} onSuccess={handleEditSuccess} onClose={handleCloseEditForm}/>
+                <EditUserForm user={editingUser} token={token} onSuccess={handleEditSuccess}
+                              onClose={handleCloseEditForm}/>
             )}
 
         </div>
