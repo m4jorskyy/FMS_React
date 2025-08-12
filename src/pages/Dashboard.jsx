@@ -3,6 +3,7 @@
 import {useAuth} from "../context/AuthContext.jsx";
 import useUsers from "../hooks/useUsers.js";
 import UserTable from "../components/UserTable.jsx";
+import CreatePlayerForm from "../components/CreatePlayerForm.jsx";
 
 export default function Dashboard() {
     const {user, role, token} = useAuth()
@@ -10,7 +11,12 @@ export default function Dashboard() {
         enabled: role === "ADMIN"
     })
 
-    if (role === "ADMIN") return <UserTable users={users} error={error} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} isFetchNextPage={isFetchNextPage} isLoading={isLoading} token={token} />
+    if (role === "ADMIN") return (
+        <div className={"mt-20"}>
+            <UserTable users={users} error={error} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}
+                     isFetchNextPage={isFetchNextPage} isLoading={isLoading} token={token}/>
+            <CreatePlayerForm token={token}/>
+        </div>)
 
     return <h1>{user}, {role}</h1>
 }

@@ -68,10 +68,10 @@ export async function deleteUser(nick, token) {
     return response.json()
 }
 
-export async function patchUser(first_name, last_name, nick, email, password, token, prevNick) {
+export async function patchUser(firstName, lastName, nick, email, password, token, prevNick) {
     const body = {
-        "first_name": first_name,
-        "last_name": last_name,
+        "first_name": firstName,
+        "last_name": lastName,
         "nick": nick,
         "email": email,
     }
@@ -127,6 +127,35 @@ export async function getPlayers() {
     }
 
     return response.json()
+}
+
+export async function postPlayer(firstName, lastName, nick, lane, champion, teamRole, token){
+    const request = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            "first_name": firstName,
+            "last_name": lastName,
+            "nick": nick,
+            "lane": lane,
+            "champion": champion,
+            "team_role": teamRole
+        })
+    }
+
+    const response = await fetch(`/api/players/create/`, request)
+
+    if(!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+    return response
 }
 
 export async function postRegister(firstName, lastName, nick, email, password) {

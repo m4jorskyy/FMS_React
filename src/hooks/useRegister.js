@@ -87,7 +87,7 @@ export default function useRegister() {
                     .join('\n')
                 setError(errorMessages)
             } else {
-                setError(error.message || "Coś poszło nie tak. Spróbuj ponownie.")
+                setError(error.message || "Something went wrong. Try again.")
             }
             setShowAlert(true)
         } finally {
