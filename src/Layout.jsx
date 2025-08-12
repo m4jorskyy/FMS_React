@@ -14,7 +14,7 @@ export default function Layout() {
 
     return (
         <>
-            <header>
+            <header className={"absolute z-10 bg-[#140000]"}>
                 <nav className={"flex flex-col overflow-x-hidden flex-wrap items-center justify-center"}>
                     <div className={"flex flex-row w-screen justify-between p-3"}>
                         <button onClick={() => setOpen(!open)} className={"cursor-pointer"}>
@@ -31,7 +31,7 @@ export default function Layout() {
                             </div>
                         </button>
 
-                        <img src={"/src/assets/logo.png"} alt={"Logo"} className={"absolute w-10 h-10 left-49 top-1"}/>
+                        <img src={"/src/assets/logo.png"} alt={"Logo"} className={"absolute w-15 h-15 left-47 top-1"}/>
 
                         {user ? (
                             <div className={"items-center"}>
