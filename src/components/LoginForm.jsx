@@ -27,7 +27,7 @@ export default function LoginForm() {
                 </div>
             ) : null}
 
-            <form onSubmit={handleLogin} className={"flex flex-col items-center"}>
+            <form onSubmit={handleLogin} className={"flex flex-col items-center mt-20"}>
                 <h3>LOG IN</h3>
                 <br />
                 <input className={"text-center placeholder:text-center"} name={"nick"} type={"text"} value={nick}

@@ -17,12 +17,10 @@ export default function SoloqMatchCard({
 
     const laneIconSrc = `/src/assets/laneIcons/${lane}.png`
     const cardStyle = {
-        backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e",
-        color: win === "true" ? "#2e2e2e" : "#f6223d"
+        backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e", color: win === "true" ? "#2e2e2e" : "#f6223d"
     }
 
-    return (
-        <div className={"flex flex-row justify-between rounded-lg p-2 mt-2"} style={cardStyle}>
+    return (<div className={"flex flex-row justify-between rounded-lg p-2 mt-2"} style={cardStyle}>
             <div className={"flex flex-col items-center justify-center"}>
                 <p>{moment(game_start).fromNow()}</p>
                 <br/>
@@ -35,18 +33,15 @@ export default function SoloqMatchCard({
                         alt={champion}
                         className={"w-15 h-15 z-1"}
                     />
-                    {lane ? (
-                        <img
+                    {lane ? (<img
                             src={laneIconSrc}
                             alt={lane}
-                            className={"relative w-7 h-6 z-10 -top-6.5 left-8"}
-                        />
-                    ) : <br />}
+                            className={"relative w-6 h-6 z-10 -top-6.5 left-8.5 border-2 border-[#140000] rounded-lg"}
+                        />) : <br/>}
                 </div>
 
                 <p>{summoner}</p>
                 <p>{kills}/{deaths}/{assists}</p>
             </div>
-        </div>
-    )
+        </div>)
 }

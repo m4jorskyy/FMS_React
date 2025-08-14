@@ -25,7 +25,7 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
         <div className={"flex flex-col items-center border-2 rounded-lg p-4 min-w-[300px] max-w-[340px]"}>
             <>
                 <h3>{name} "{nick}" {surname}</h3>
-                <img src={laneIconSrc} alt={lane} className={"w-8 h-7"}/>
+                <img src={laneIconSrc} alt={lane} className={"w-7 h-7"}/>
                 <br/>
                 <img
                     src={`/src/assets/teamPhotos/${nick}.jpg`}

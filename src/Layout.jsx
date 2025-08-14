@@ -14,7 +14,7 @@ export default function Layout() {
 
     return (
         <>
-            <header className={"absolute z-10 bg-[#140000]"}>
+            <header className={"z-10 bg-[#140000]"}>
                 <nav className={"flex flex-col overflow-x-hidden flex-wrap items-center justify-center"}>
                     <div className={"flex flex-row w-screen justify-between p-3"}>
                         <button onClick={() => setOpen(!open)} className={"cursor-pointer"}>
@@ -38,7 +38,7 @@ export default function Layout() {
                                 <button
                                     onClick={handleLogout}
                                     disabled={loading}
-                                    className={"rounded-lg border-2 p-2"}
+                                    className={"rounded-lg border-2 p-2 mr-2"}
                                 >
                                     {loading ? "Loading..." : "Log out"}
                                 </button>

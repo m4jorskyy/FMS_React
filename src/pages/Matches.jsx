@@ -24,9 +24,9 @@ export default function Matches() {
     const finished = finishedData?.pages.flat() || []
 
     return (
-        <div>
+        <div className={"flex flex-col items-center mt-20"}>
             {upcoming.length && (
-                <section>
+                <div className={"flex flex-col items-center"}>
                     <h2>Upcoming</h2>
                     {upcoming.map(match => <OfficialMatchCard key={match.id}
                                                               opponents={match.opponents.map(o => o.opponent)}
@@ -35,11 +35,11 @@ export default function Matches() {
                         position: g.position,
                         length: g.length, winnerId: g.winner.id
                     }))} leagueName={match.league.name} tournamentName={match.tournament.name}/>)}
-                </section>
+                </div>
             )}
 
             {running.length && (
-                <section>
+                <div className={"flex flex-col items-center"}>
                     <h2>Live</h2>
                     {running.map(match => <OfficialMatchCard key={match.id}
                                                              opponents={match.opponents.map(o => o.opponent)}
@@ -53,11 +53,11 @@ export default function Matches() {
                                                              }))}
                                                              leagueName={match.league.name}
                                                              tournamentName={match.tournament.name}/>)}
-                </section>
+                </div>
             )}
 
             {finished.length && (
-                <section>
+                <div className={"flex flex-col items-center"}>
                     <h2>Finished</h2>
                     {finished.map(match => <OfficialMatchCard key={match.id}
                                                               opponents={match.opponents.map(o => o.opponent)}
@@ -71,7 +71,7 @@ export default function Matches() {
                                                               }))}
                                                               leagueName={match.league.name}
                                                               tournamentName={match.tournament.name}/>)}
-                </section>
+                </div>
             )}
 
         </div>
