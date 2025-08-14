@@ -9,7 +9,7 @@ export default function CreatePlayerForm() {
     const [open, setOpen] = useState(false)
 
     return (
-        <div>
+        <>
             <button onClick={() => setOpen(!open)} className={"border-2 p-2 rounded-lg cursor-pointer"}>Add player...</button>
             <div className={open ? null : "hidden" }>
                 <div>
@@ -75,6 +75,6 @@ export default function CreatePlayerForm() {
                     <button type={"submit"} className={"cursor-pointer"}>Add player</button>
                 </form>
             </div>
-        </div>
+        </>
     )
 }

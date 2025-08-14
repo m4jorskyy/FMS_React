@@ -263,6 +263,33 @@ export async function postNewsletter(email) {
     return response.json()
 }
 
+export async function postPost(author, title, text, token) {
+    const request = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            "author": author,
+            "title": title,
+            "text": text
+        })
+    }
+
+    const response = await fetch(`/api/posts/create/`, request)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
 export async function getPosts(page = 1) {
     const response = await fetch(`/api/posts/?page=${page}`)
 

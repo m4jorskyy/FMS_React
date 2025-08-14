@@ -1,24 +1,20 @@
-//useCreatePlayer.js
+//useCreatePost.js
 
 import {useEffect, useState} from "react";
+import {postPost} from "../services/api.js";
 import {useAuth} from "../context/AuthContext.jsx";
-import {postPlayer} from "../services/api.js";
+import moment from "moment";
 
-export default function useCreatePlayer() {
+export default function useCreatePost() {
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        nick: "",
-        lane: "",
-        champion: "",
-        teamRole: "",
-        loading: false,
-        error: "",
+        title: "",
+        text: "",
         success: "",
+        error: "",
         showAlert: false
     })
 
-    const {token} = useAuth()
+    const {token, user} = useAuth()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -40,21 +36,18 @@ export default function useCreatePlayer() {
         }))
 
         try {
-            const response = await postPlayer(formData.firstName, formData.lastName, formData.nick, formData.lane, formData.champion, formData.teamRole, token)
-
+            const response = await postPost(user, formData.title, formData.text, token)
             if (response.ok) {
                 setFormData(prev => ({
                     ...prev,
                     loading: false,
-                    success: "Player created successfully.",
+                    success: "Post created successfully.",
                     error: "",
                     showAlert: true,
-                    firstName: "",
-                    lastName: "",
-                    nick: "",
-                    lane: "",
-                    champion: "",
-                    teamRole: ""
+                    author: "",
+                    title: "",
+                    text: "",
+                    date: ""
                 }));
             }
         } catch (error) {
@@ -78,6 +71,11 @@ export default function useCreatePlayer() {
                     showAlert: true
                 }))
             }
+        } finally {
+            setFormData(prev => ({
+                ...prev,
+                loading: false
+            }))
         }
     }
 
