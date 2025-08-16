@@ -15,7 +15,13 @@ export default function SoloqMatchCard({
     const ddVersion = '15.14.1'
     const champImgUrl = `https://ddragon.leagueoflegends.com/cdn/${ddVersion}/img/champion/${champion}.png`
 
-    const laneIconSrc = `/src/assets/laneIcons/${lane}.png`
+    const firstLetter = lane.charAt(0)
+    const remaining = lane.slice(1).toLowerCase()
+
+    lane = firstLetter + remaining
+
+    const laneIconSrc = `/laneIcons/${lane}.png`
+    console.log(lane)
     const cardStyle = {
         backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e", color: win === "true" ? "#2e2e2e" : "#f6223d"
     }

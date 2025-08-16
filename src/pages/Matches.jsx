@@ -25,7 +25,7 @@ export default function Matches() {
 
     return (
         <div className={"flex flex-col items-center mt-20"}>
-            {upcoming.length && (
+            {upcoming.length ? (
                 <div className={"flex flex-col items-center"}>
                     <h2>Upcoming</h2>
                     {upcoming.map(match => <OfficialMatchCard key={match.id}
@@ -36,9 +36,9 @@ export default function Matches() {
                         length: g.length, winnerId: g.winner.id
                     }))} leagueName={match.league.name} tournamentName={match.tournament.name}/>)}
                 </div>
-            )}
+            ) : null}
 
-            {running.length && (
+            {running.length ? (
                 <div className={"flex flex-col items-center"}>
                     <h2>Live</h2>
                     {running.map(match => <OfficialMatchCard key={match.id}
@@ -54,9 +54,9 @@ export default function Matches() {
                                                              leagueName={match.league.name}
                                                              tournamentName={match.tournament.name}/>)}
                 </div>
-            )}
+            ) : null}
 
-            {finished.length && (
+            {finished.length ? (
                 <div className={"flex flex-col items-center"}>
                     <h2>Finished</h2>
                     {finished.map(match => <OfficialMatchCard key={match.id}
@@ -72,7 +72,7 @@ export default function Matches() {
                                                               leagueName={match.league.name}
                                                               tournamentName={match.tournament.name}/>)}
                 </div>
-            )}
+            ) : null}
 
         </div>
     )

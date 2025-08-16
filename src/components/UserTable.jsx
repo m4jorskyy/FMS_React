@@ -135,7 +135,7 @@ export default function UserTable({users, fetchNextPage, hasNextPage, isFetchNex
     if (!userPage.length && isLoading) {
         return (
             <div className={"animate-l1"}>
-                <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
             </div>
         )
     }

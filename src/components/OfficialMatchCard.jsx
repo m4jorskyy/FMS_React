@@ -19,7 +19,7 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
         <div className={"border-2 rounded-lg p-4 m-4 cursor-pointer w-[90vw]"} onClick={() => setOpen(!open)}>
             <div className={"flex flex-row justify-between gap-2"}>
                 <div className={"flex flex-col items-center"}>
-                    <img src={"/src/assets/logo.png"} alt={"FMS"} className={"w-16 h-16"}/>
+                    <img src={"/logo.png"} alt={"FMS"} className={"w-16 h-16"}/>
                     <p>FMS</p>
                 </div>
                 <span className={"text-center text-[40px]"}>
@@ -46,7 +46,7 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
                         {games.map(g => (
                             <td key={g.position} className={"border-2 border-dashed p-2"}>{g.winnerId === fmsId ?
                                 <div className={"flex justify-center items-center"}>
-                                    <img src={"/src/assets/logo.png"} alt={"FMS"} className={"w-6 h-6"}/>
+                                    <img src={"/logo.png"} alt={"FMS"} className={"w-6 h-6"}/>
                                 </div>
                                 : g.winnerId === null ? null : <div className={"flex justify-center items-center"}>
                                     <img src={opp.image_url} alt={opp.acronym} className={"w-6 h-6"}/>

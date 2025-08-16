@@ -15,7 +15,7 @@ export default function Roster() {
         <div className={"flex flex-col items-center w-screen h-screen overflow-y-auto mt-20 z-0"}>
             {loading ? (
                 <div className={"animate-l1"}>
-                    <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
                 </div>
             ) : null}
 

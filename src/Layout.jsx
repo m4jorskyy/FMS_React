@@ -31,7 +31,7 @@ export default function Layout() {
                             </div>
                         </button>
 
-                        <img src={"/src/assets/logo.png"} alt={"Logo"} className={"absolute w-15 h-15 left-47 top-1"}/>
+                        <img src={"/logo.png"} alt={"Logo"} className={"absolute w-15 h-15 left-47 top-1"}/>
 
                         {user ? (
                             <div className={"items-center"}>

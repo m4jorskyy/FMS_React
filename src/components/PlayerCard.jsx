@@ -17,7 +17,7 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
         isFetchingNextPage
     } = useSoloqMatches(nick)
 
-    const laneIconSrc = `/src/assets/laneIcons/${lane}.png`
+    const laneIconSrc = `/laneIcons/${lane}.png`
     const matchList = data?.pages.flatMap(page => page.results) || []
 
 
@@ -28,7 +28,7 @@ export default function PlayerCard({name, surname, nick, lane, champion, teamRol
                 <img src={laneIconSrc} alt={lane} className={"w-7 h-7"}/>
                 <br/>
                 <img
-                    src={`/src/assets/teamPhotos/${nick}.jpg`}
+                    src={`/teamPhotos/${nick}.jpg`}
                     alt={nick}
                     className={"w-50 h-50 rounded-[50%] object-cover"}
                 />

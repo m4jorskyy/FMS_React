@@ -23,7 +23,7 @@ export default function LoginForm() {
 
             {loading ? (
                 <div className={"animate-l1"}>
-                    <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
                 </div>
             ) : null}
 
@@ -35,7 +35,7 @@ export default function LoginForm() {
                 <input className={"text-center placeholder:text-center"} name={"password"} type={"password"}
                        value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br />
-                <button type={"submit"}>LOG IN</button>
+                <button type={"submit"} className={"cursor-pointer"}>LOG IN</button>
             </form>
 
         </>
