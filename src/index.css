@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 .navbar-links {
-    @apply rounded-lg p-4 w-40 m-2 text-center text-[#f6223d] border-4 border-[#f6223d] hover:opacity-60 transition-all active:opacity-60 transition-all
+    @apply cursor-pointer rounded-lg border-2 border-[#f6223d] px-4 py-2
+    text-[#f6223d] font-semibold transition-all
+    hover:bg-[#f6223d] hover:text-[#140000]
+    active:opacity-70 w-40 text-center m-2
 }
 
 @font-face {
@@ -13,12 +16,21 @@
     --animate-l1: l1 0.3s linear infinite alternate;
 
     @keyframes l1 {
-        to{opacity: 0}
+        to {
+            opacity: 0
+        }
     }
 }
 
 input {
     @apply focus:outline-2 focus:outline-[#f6223d] hover:outline-2 placeholder:text-center rounded-lg
+}
+
+button {
+    @apply cursor-pointer rounded-lg border-2 border-[#f6223d] px-4 py-2
+    text-[#f6223d] font-semibold transition-all
+    hover:bg-[#f6223d] hover:text-[#140000]
+    active:opacity-70;
 }
 
 /* Dodaj do swojego CSS */
@@ -46,4 +58,79 @@ input {
     list-style-type: disc;
     margin-left: 1.5rem;
     margin-bottom: 1rem;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideIn {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
+  }
+  50% {
+    box-shadow: 0 0 10px #f6223d, 0 0 20px #f6223d, 0 0 40px #f6223d;
+  }
+  100% {
+    box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
+  }
+}
+
+.btn-shine {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #f6223d;
+  color: #f6223d;
+  background: transparent;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: pulseGlow 2s infinite;
+}
+
+.btn-shine:hover {
+  background: #f6223d;
+  color: #140000;
+  animation: none;
+  box-shadow: 0 0 15px #f6223d, 0 0 30px #f6223d, 0 0 60px #f6223d;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 50px;
+  height: 200%;
+  background: white;
+  opacity: 0.2;
+  transform: rotate(25deg);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-shine:hover::after {
+  left: 120%;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }

@@ -21,7 +21,6 @@ export default function SoloqMatchCard({
     lane = firstLetter + remaining
 
     const laneIconSrc = `/laneIcons/${lane}.png`
-    console.log(lane)
     const cardStyle = {
         backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e", color: win === "true" ? "#2e2e2e" : "#f6223d"
     }

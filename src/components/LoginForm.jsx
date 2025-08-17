@@ -1,4 +1,5 @@
 import useLogin from "../hooks/useLogin.js";
+import Alert from "./Alert.jsx";
 
 export default function LoginForm() {
     const {
@@ -14,11 +15,9 @@ export default function LoginForm() {
     } = useLogin()
 
     return (
-        <>
+        <div className={"flex flex-col justify-center items-center h-screen overflow-hidden w-full -mt-24"}>
             {showAlert ? (
-                <div>
-                    <p>{error || success}</p>
-                </div>
+                <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
             ) : null}
 
             {loading ? (
@@ -27,17 +26,17 @@ export default function LoginForm() {
                 </div>
             ) : null}
 
-            <form onSubmit={handleLogin} className={"flex flex-col items-center mt-20"}>
+            <form onSubmit={handleLogin} className={"flex flex-col items-center"}>
                 <h3>LOG IN</h3>
                 <br />
                 <input className={"text-center placeholder:text-center"} name={"nick"} type={"text"} value={nick}
                        onChange={handleNickChange} placeholder={"Nick"}/>
-                <input className={"text-center placeholder:text-center"} name={"password"} type={"password"}
+                <input className={"text-center mt-2 placeholder:text-center"} name={"password"} type={"password"}
                        value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br />
-                <button type={"submit"} className={"cursor-pointer"}>LOG IN</button>
+                <button type={"submit"} className={"btn-shine"} disabled={loading}>LOG IN</button>
             </form>
 
-        </>
+        </div>
     )
 }

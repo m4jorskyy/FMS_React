@@ -13,17 +13,19 @@ export default function useLogin() {
     const [loading, setLoading] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
 
-    const thanks = "Logowanie udane!"
+    const thanks = "Login successful!"
 
     const {login} = useAuth()
     const navigate = useNavigate()
 
     const handleNickChange = (e) => {
+        setShowAlert(false)
         setNick(e.target.value)
         setError("")
     }
 
     const handlePasswordChange = (e) => {
+        setShowAlert(false)
         setPassword(e.target.value)
         setError("")
     }
@@ -32,6 +34,7 @@ export default function useLogin() {
         event.preventDefault()
         setError("")
         setSuccess("")
+        setShowAlert(false)
         setLoading(true)
 
         try {
@@ -44,11 +47,6 @@ export default function useLogin() {
 
         } catch (error) {
             if (error.data) {
-                const errorMessages = Object.entries(error.data)
-                    .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
-                    .join('\n')
-                setError(errorMessages)
-            } else {
                 setError(error.message || "Something went wrong. Try again.")
             }
             setShowAlert(true)
@@ -58,14 +56,14 @@ export default function useLogin() {
     }
 
     useEffect(() => {
-    if (success) {
-        const timeout = setTimeout(() => {
-            navigate("/dashboard")
-        }, 2000)
+        if (success) {
+            const timeout = setTimeout(() => {
+                navigate("/dashboard")
+            }, 2000)
 
-        return () => clearTimeout(timeout)
-    }
-}, [success, navigate])
+            return () => clearTimeout(timeout)
+        }
+    }, [success, navigate])
 
     return {
         nick,
