@@ -76,7 +76,7 @@ export async function patchUser(firstName, lastName, nick, email, password, toke
         "email": email,
     }
 
-    if(password){
+    if (password) {
         body.password = password
     }
 
@@ -129,7 +129,7 @@ export async function getPlayers() {
     return response.json()
 }
 
-export async function postPlayer(firstName, lastName, nick, lane, champion, teamRole, token){
+export async function postPlayer(firstName, lastName, nick, lane, champion, teamRole, twitter, youtube, twitch, kick, instagram, tiktok, token) {
     const request = {
         method: "POST",
         headers: {
@@ -142,13 +142,19 @@ export async function postPlayer(firstName, lastName, nick, lane, champion, team
             "nick": nick,
             "lane": lane,
             "champion": champion,
-            "team_role": teamRole
+            "team_role": teamRole,
+            "twitter": twitter,
+            "youtube": youtube,
+            "twitch": twitch,
+            "kick": kick,
+            "instagram": instagram,
+            "tiktok": tiktok
         })
     }
 
     const response = await fetch(`/api/players/create/`, request)
 
-    if(!response.ok) {
+    if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
         error.status = response.status

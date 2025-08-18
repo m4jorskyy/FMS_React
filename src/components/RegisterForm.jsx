@@ -1,6 +1,7 @@
 //RegisterForm.jsx
 
 import useRegister from "../hooks/useRegister.js";
+import Alert from "./Alert.jsx";
 
 export default function RegisterForm() {
     const {
@@ -25,19 +26,23 @@ export default function RegisterForm() {
     } = useRegister()
 
     return (
-        <div>
+        <div className={"flex flex-col items-center w-full min-h-screen scrollbar-hide z-0"}>
+
             {showAlert ? (
-                <div>
-                    <p>{error || success}</p>
-                    <button onClick={handleClose}>
-                        ×
-                    </button>
+                <div onClick={handleClose}>
+                    <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
                 </div>
             ) : null}
 
-            <form onSubmit={handleSubmit} className={"flex flex-col items-center"}>
-                <h1>REGISTER</h1>
-                <br />
+            {loading ? (
+                <div className={"animate-l1"}>
+                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                </div>
+            ) : null}
+
+            <form onSubmit={handleSubmit} className={"flex flex-col items-center justify-center gap-3"}>
+                <h1 className={"text-[64px] px-4 text-center"}>Carve your name in the shadow</h1>
+                <br/>
                 <input
                     type="text"
                     value={firstName}
@@ -45,7 +50,7 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"first name"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
 
                 <input
@@ -55,9 +60,8 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"last name"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
-
 
 
                 <input
@@ -67,9 +71,8 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"email"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
-
 
 
                 <input
@@ -79,7 +82,7 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"nick"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
 
                 <input
@@ -89,7 +92,7 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"password"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
 
                 <input
@@ -99,13 +102,11 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"Password check"}
-                    className={"placeholder: text-center"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
                 />
-                <br />
+                <br/>
 
-                <button type="submit" disabled={loading} className={"cursor-pointer"}>
-                    {loading ? '' : 'Register'}
-                </button>
+                <button type="submit" disabled={loading} className={"btn-shine text-[48px]"}>REGISTER</button>
             </form>
         </div>
     )

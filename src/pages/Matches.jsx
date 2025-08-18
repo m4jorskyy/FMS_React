@@ -24,10 +24,10 @@ export default function Matches() {
     const finished = finishedData?.pages.flat() || []
 
     return (
-        <div className={"flex flex-col items-center mt-20"}>
+        <div className={"flex flex-col items-center"}>
             {upcoming.length ? (
                 <div className={"flex flex-col items-center"}>
-                    <h2>Upcoming</h2>
+                    <h1 className={"text-[60px]"}>Upcoming</h1>
                     {upcoming.map(match => <OfficialMatchCard key={match.id}
                                                               opponents={match.opponents.map(o => o.opponent)}
                                                               beginAt={match.begin_at} status={match.status}
@@ -40,7 +40,7 @@ export default function Matches() {
 
             {running.length ? (
                 <div className={"flex flex-col items-center"}>
-                    <h2>Live</h2>
+                    <h1 className={"text-[60px]"}>Live</h1>
                     {running.map(match => <OfficialMatchCard key={match.id}
                                                              opponents={match.opponents.map(o => o.opponent)}
                                                              beginAt={match.begin_at}
@@ -58,7 +58,7 @@ export default function Matches() {
 
             {finished.length ? (
                 <div className={"flex flex-col items-center"}>
-                    <h2>Finished</h2>
+                    <h1 className={"text-[60px]"}>Finished</h1>
                     {finished.map(match => <OfficialMatchCard key={match.id}
                                                               opponents={match.opponents.map(o => o.opponent)}
                                                               beginAt={match.begin_at}

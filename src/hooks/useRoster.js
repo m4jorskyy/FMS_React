@@ -3,7 +3,7 @@
 import {getPlayers} from "../services/api.js";
 import {useQuery} from "@tanstack/react-query";
 
-function useRoster() {
+export default function useRoster() {
    const {
         data: players = [],
         isLoading,
@@ -29,5 +29,3 @@ function useRoster() {
         error: isError ? error : null
     }
 }
-
-export default useRoster;

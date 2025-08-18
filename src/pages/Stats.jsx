@@ -1,5 +1,9 @@
 //Stats.jsx
 
 export default function Stats() {
-    return <h1>STATS</h1>
+    return (
+        <div className={"flex flex-col items-center justify-center h-screen text-center -mt-24"}>
+            <h1 className={"text-[50px]"}>The whispers are not yet clear<br />but they are coming</h1>
+        </div>
+    )
 }

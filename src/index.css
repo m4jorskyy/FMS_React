@@ -4,7 +4,7 @@
     @apply cursor-pointer rounded-lg border-2 border-[#f6223d] px-4 py-2
     text-[#f6223d] font-semibold transition-all
     hover:bg-[#f6223d] hover:text-[#140000]
-    active:opacity-70 w-40 text-center m-2
+    active:opacity-70 text-center m-2
 }
 
 @font-face {
@@ -28,12 +28,11 @@ input {
 
 button {
     @apply cursor-pointer rounded-lg border-2 border-[#f6223d] px-4 py-2
-    text-[#f6223d] font-semibold transition-all
+    text-[#f6223d] transition-all
     hover:bg-[#f6223d] hover:text-[#140000]
     active:opacity-70;
 }
 
-/* Dodaj do swojego CSS */
 .markdown-preview h1 {
     font-size: 2rem;
     font-weight: bold;
@@ -73,6 +72,10 @@ button {
 
 .animate-slideIn {
     animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulseGlow {
+    animation: pulseGlow 2s infinite;
 }
 
 @keyframes pulseGlow {

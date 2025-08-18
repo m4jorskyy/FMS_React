@@ -12,6 +12,12 @@ export default function useCreatePlayer() {
         lane: "",
         champion: "",
         teamRole: "",
+        twitter: "",
+        youtube: "",
+        twitch: "",
+        kick: "",
+        instagram: "",
+        tiktok: "",
         loading: false,
         error: "",
         success: "",
@@ -40,7 +46,21 @@ export default function useCreatePlayer() {
         }))
 
         try {
-            const response = await postPlayer(formData.firstName, formData.lastName, formData.nick, formData.lane, formData.champion, formData.teamRole, token)
+            const response = await postPlayer(
+                formData.firstName,
+                formData.lastName,
+                formData.nick,
+                formData.lane,
+                formData.champion,
+                formData.teamRole,
+                formData.twitter,
+                formData.youtube,
+                formData.twitch,
+                formData.kick,
+                formData.instagram,
+                formData.tiktok,
+                token
+            )
 
             if (response.ok) {
                 setFormData(prev => ({
@@ -54,7 +74,13 @@ export default function useCreatePlayer() {
                     nick: "",
                     lane: "",
                     champion: "",
-                    teamRole: ""
+                    teamRole: "",
+                    twitter: "",
+                    youtube: "",
+                    twitch: "",
+                    kick: "",
+                    instagram: "",
+                    tiktok: ""
                 }));
             }
         } catch (error) {

@@ -3,6 +3,7 @@
 import useCreatePlayer from "../hooks/useCreatePlayer.js";
 import {X} from 'lucide-react'
 import {useState} from "react";
+import Alert from "./Alert.jsx";
 
 export default function CreatePlayerForm() {
     const {formData, handleChange, handleClose, handleSubmit} = useCreatePlayer()
@@ -10,15 +11,19 @@ export default function CreatePlayerForm() {
 
     return (
         <>
-            <button onClick={() => setOpen(!open)} className={"border-2 p-2 rounded-lg cursor-pointer"}>Add player...</button>
-            <div className={open ? null : "hidden" }>
+            <button onClick={() => setOpen(!open)} className={"border-2 p-2 rounded-lg cursor-pointer"}>Add player...
+            </button>
+            <div className={open ? null : "hidden"}>
                 <div>
                     {formData.showAlert ? (
-                        <div>
-                            <p>{formData.error || formData.success}</p>
-                            <button onClick={handleClose}>
-                                <X/>
-                            </button>
+                        <div onClick={handleClose}>
+                            <Alert type={formData.error === "" ? "success" : "error"} message={formData.error === "" ? formData.success : formData.error}/>
+                        </div>
+                    ) : null}
+
+                    {formData.loading ? (
+                        <div className={"animate-l1"}>
+                            <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
                         </div>
                     ) : null}
                 </div>
@@ -30,7 +35,7 @@ export default function CreatePlayerForm() {
                         placeholder={"First name"}
                         value={formData.firstName}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
                     <input
                         type={"text"}
@@ -38,7 +43,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Last name"}
                         value={formData.lastName}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
                     <input
                         type={"text"}
@@ -46,7 +51,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Nick"}
                         value={formData.nick}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
                     <input
                         type={"text"}
@@ -54,7 +59,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Lane"}
                         value={formData.lane}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
                     <input
                         type={"text"}
@@ -62,7 +67,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Champion"}
                         value={formData.champion}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
                     <input
                         type={"text"}
@@ -70,8 +75,62 @@ export default function CreatePlayerForm() {
                         placeholder={"Team role"}
                         value={formData.teamRole}
                         onChange={handleChange}
-                        className={"placeholder: text-center"}
+                        className={"text-center"}
                     />
+                    <input
+                        type="text"
+                        name="twitter"
+                        placeholder="Twitter link"
+                        value={formData.twitter}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
+                    <input
+                        type="text"
+                        name="youtube"
+                        placeholder="YouTube link"
+                        value={formData.youtube}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
+                    <input
+                        type="text"
+                        name="twitch"
+                        placeholder="Twitch link"
+                        value={formData.twitch}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
+                    <input
+                        type="text"
+                        name="kick"
+                        placeholder="Kick link"
+                        value={formData.kick}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
+                    <input
+                        type="text"
+                        name="instagram"
+                        placeholder="Instagram link"
+                        value={formData.instagram}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
+                    <input
+                        type="text"
+                        name="tiktok"
+                        placeholder="TikTok link"
+                        value={formData.tiktok}
+                        onChange={handleChange}
+                        className="text-center"
+                    />
+
                     <button type={"submit"} className={"cursor-pointer"}>Add player</button>
                 </form>
             </div>

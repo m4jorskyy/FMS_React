@@ -100,6 +100,16 @@ export default function useRegister() {
     }
 
     useEffect(() => {
+        if(error) {
+            const timeout = setTimeout(() => {
+                handleClose()
+            }, 3000)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [error]);
+
+    useEffect(() => {
         if (success) {
             const timer = setTimeout(() => {
                 handleClose()

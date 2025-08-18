@@ -19,13 +19,13 @@ export default function useLogin() {
     const navigate = useNavigate()
 
     const handleNickChange = (e) => {
-        setShowAlert(false)
+
         setNick(e.target.value)
         setError("")
     }
 
     const handlePasswordChange = (e) => {
-        setShowAlert(false)
+
         setPassword(e.target.value)
         setError("")
     }
@@ -34,7 +34,7 @@ export default function useLogin() {
         event.preventDefault()
         setError("")
         setSuccess("")
-        setShowAlert(false)
+
         setLoading(true)
 
         try {
@@ -55,9 +55,24 @@ export default function useLogin() {
         }
     }
 
+    const handleClose = () => {
+        setShowAlert(false)
+    }
+
+    useEffect(() => {
+        if(error) {
+            const timeout = setTimeout(() => {
+                handleClose()
+            }, 3000)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [error]);
+
     useEffect(() => {
         if (success) {
             const timeout = setTimeout(() => {
+                handleClose()
                 navigate("/dashboard")
             }, 2000)
 
@@ -71,6 +86,7 @@ export default function useLogin() {
         handleLogin,
         handlePasswordChange,
         handleNickChange,
+        handleClose,
         error,
         success,
         loading,

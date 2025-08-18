@@ -13,10 +13,9 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
 
     const [open, setOpen] = useState(false)
 
-    console.log(leagueName, tournamentName)
 
     return (
-        <div className={"border-2 rounded-lg p-4 m-4 cursor-pointer w-[90vw]"} onClick={() => setOpen(!open)}>
+        <div className={"border-2 rounded-lg p-4 m-4 cursor-pointer w-[90vw] text-center"} onClick={() => setOpen(!open)}>
             <div className={"flex flex-row justify-between gap-2"}>
                 <div className={"flex flex-col items-center"}>
                     <img src={"/logo.png"} alt={"FMS"} className={"w-16 h-16"}/>
@@ -24,14 +23,21 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
                 </div>
                 <span className={"text-center text-[40px]"}>
                     {orderedResults[0].score} : {orderedResults[1].score}
+                    <br />
                 </span>
                 <div className={"flex flex-col items-center"}>
                     <img src={opp.image_url} alt={opp.acronym} className={"w-16 h-16"}/>
                     <p>{opp.acronym}</p>
                 </div>
             </div>
-            <div>
-                <table className={`border-2 border-dashed border-collapse text-center ${open ? null : "hidden"}`}>
+
+            <p>START <br /> {moment(beginAt).format("DD-MM-YYYY HH:mm")}</p>
+
+            <p className={"text-left"}>{leagueName} <br /> {tournamentName}</p>
+
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
+                <hr className={"my-4"}/>
+                <table className={`border-2 border-dashed border-collapse text-center`}>
                     <tbody>
                     <tr>
                         <td className={"p-2 border-2 border-dashed"}>
@@ -63,7 +69,6 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
                     </tbody>
                 </table>
             </div>
-
         </div>
     )
 }

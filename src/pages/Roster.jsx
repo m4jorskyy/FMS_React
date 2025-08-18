@@ -28,7 +28,7 @@ export default function Roster() {
                             {starters.map(starter => (
                                 <PlayerCard key={starter.id} name={starter.first_name} surname={starter.last_name}
                                             nick={starter.nick}
-                                            teamRole={starter.team_role} champion={starter.champion} lane={starter.lane}
+                                            champion={starter.champion} lane={starter.lane} instagram={starter.instagram} kick={starter.kick} tiktok={starter.tiktok} twitch={starter.twitch} twitter={starter.twitter} youtube={starter.youtube}
                                 />
                             ))}
                         </div>
@@ -45,7 +45,7 @@ export default function Roster() {
                             {coaches.map(coach => (
                                 <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
                                             nick={coach.nick}
-                                            teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}/>
+                                            teamRole={coach.team_role} champion={coach.champion} lane={coach.lane} />
                             ))}
                         </div>
                     </div>
@@ -59,8 +59,7 @@ export default function Roster() {
                         <br />
                         <div className={"flex flex-row gap-2 overflow-x-scroll w-full items-start scrollbar-hide"}>
                             {subs.map(sub => (
-                                <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
-                                            teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}/>
+                                <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick} teamRole={sub.team_role} champion={sub.champion} lane={sub.lane} instagram={sub.instagram} kick={sub.kick} twitter={sub.twitter} youtube={sub.youtube} tiktok={sub.tiktok} twitch={sub.twitch}/>
                             ))}
                         </div>
                     </div>

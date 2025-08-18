@@ -10,6 +10,7 @@ export default function LoginForm() {
         success,
         error,
         handleLogin,
+        handleClose,
         handleNickChange,
         handlePasswordChange
     } = useLogin()
@@ -17,7 +18,9 @@ export default function LoginForm() {
     return (
         <div className={"flex flex-col justify-center items-center h-screen overflow-hidden w-full -mt-24"}>
             {showAlert ? (
-                <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
+                <div onClick={handleClose}>
+                    <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
+                </div>
             ) : null}
 
             {loading ? (
@@ -26,15 +29,15 @@ export default function LoginForm() {
                 </div>
             ) : null}
 
-            <form onSubmit={handleLogin} className={"flex flex-col items-center"}>
-                <h3>LOG IN</h3>
-                <br />
-                <input className={"text-center placeholder:text-center"} name={"nick"} type={"text"} value={nick}
+            <form onSubmit={handleLogin} className={"flex flex-col items-center justify-center gap-3"}>
+                <h1 className={"text-[64px] px-4 text-center"}>Whispers know your name</h1>
+                <br/>
+                <input className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"} name={"nick"} type={"text"} value={nick}
                        onChange={handleNickChange} placeholder={"Nick"}/>
-                <input className={"text-center mt-2 placeholder:text-center"} name={"password"} type={"password"}
+                <input className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"} name={"password"} type={"password"}
                        value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
-                <br />
-                <button type={"submit"} className={"btn-shine"} disabled={loading}>LOG IN</button>
+                <br/>
+                <button type={"submit"} className={"btn-shine text-[48px]   "} disabled={loading}>LOG IN</button>
             </form>
 
         </div>
