@@ -40,7 +40,7 @@ export default function RegisterForm() {
                 </div>
             ) : null}
 
-            <form onSubmit={handleSubmit} className={"flex flex-col items-center justify-center gap-3"}>
+            <form onSubmit={handleSubmit} className={"flex flex-col items-center justify-center gap-4"}>
                 <h1 className={"text-[64px] px-4 text-center"}>Carve your name in the shadow</h1>
                 <br/>
                 <input

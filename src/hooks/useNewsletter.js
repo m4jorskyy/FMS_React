@@ -17,7 +17,7 @@ export default function useNewsletter() {
         setSuccess('')
     }
 
-    const thanks = 'Dziękujemy za zapisanie się do newslettera!'
+    const thanks = 'Thank you for signing in newsletter'
 
     const handleSubmit = async (event) => {
         event.preventDefault()

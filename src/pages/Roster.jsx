@@ -12,7 +12,7 @@ export default function Roster() {
     const subs = players.filter(p => p.team_role === 'Sub')
 
     return (
-        <div className={"flex flex-col items-center w-full min-h-screen scrollbar-hide z-0"}>
+        <div className={"flex flex-col items-center w-full min-h-screen scrollbar-hide mb-4 z-0"}>
             {loading ? (
                 <div className={"animate-l1"}>
                     <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>

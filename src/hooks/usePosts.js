@@ -3,7 +3,7 @@
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {getPosts} from "../services/api.js";
 
-function usePosts() {
+export default function usePosts() {
     return useInfiniteQuery({
         queryKey: ['posts'],
         queryFn: ({pageParam = 1}) => getPosts(pageParam),
@@ -20,5 +20,3 @@ function usePosts() {
     })
 
 }
-
-export default usePosts;

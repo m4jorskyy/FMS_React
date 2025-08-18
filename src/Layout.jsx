@@ -5,6 +5,7 @@ import {useAuth} from "./context/AuthContext.jsx";
 import useLogout from "./hooks/useLogout.js";
 import {useState} from "react";
 import {AlignJustify, LogIn, X, LogOut} from "lucide-react";
+import Login from "./pages/Login.jsx";
 
 export default function Layout() {
     const {user} = useAuth()
@@ -44,7 +45,7 @@ export default function Layout() {
                                 disabled={loading}
                                 className={"text-white hover:text-[#f6223d] transition-colors px-3 py-1"}
                             >
-                                {loading ? "Loading..." : <LogOut />}
+                                {loading ? "Loading..." : <LogOut/>}
                             </button>
                         ) : (
                             <button
@@ -54,7 +55,14 @@ export default function Layout() {
                                 }}
                                 className={"text-white hover:text-[#f6223d] transition-colors"}
                             >
-                                <LogIn/>
+                                <div className="w-6 h-6 relative">
+                                    <LogIn
+                                        className={`absolute inset-0 transition-all duration-300 ${openLogin ? 'opacity-0 -rotate-90' : 'opacity-100 rotate-0'}`}
+                                    />
+                                    <X
+                                        className={`absolute inset-0 transition-all duration-300 ${openLogin ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`}
+                                    />
+                                </div>
                             </button>
                         )}
                     </div>

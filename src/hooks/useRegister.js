@@ -18,7 +18,7 @@ export default function useRegister() {
 
     const navigate=useNavigate()
 
-    const thanks = "Dziękujemy za rejestrację!"
+    const thanks = "Registration successful"
 
     const handleFirstNameChange = (e) => {
         setFirstName(e.target.value)
@@ -55,13 +55,13 @@ export default function useRegister() {
         setError("")
         setSuccess("")
         if (!email.includes('@')) {
-            setError('Nieprawidłowy format adresu e-mail!')
+            setError('Wrong format of e-mail')
             setShowAlert(true)
             return
         }
 
         if (password !== passwordCheck) {
-            setError('Hasła się nie zgadzają!')
+            setError("Passwords don't match")
             setShowAlert(true)
             return
         }
@@ -117,7 +117,7 @@ export default function useRegister() {
             }, 2000)
             return () => clearTimeout(timer)
         }
-    }, [success])
+    }, [navigate, success])
 
     return {
         firstName,

@@ -13,7 +13,7 @@ export default function Dashboard() {
     })
 
     if (role === "ADMIN") return (
-        <div className={"mt-20"}>
+        <div className={"flex flex-col w-screen px-4 gap-4"}>
             <UserTable users={users} error={error} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}
                      isFetchNextPage={isFetchNextPage} isLoading={isLoading} token={token}/>
             <CreatePlayerForm />

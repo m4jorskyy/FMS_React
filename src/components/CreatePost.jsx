@@ -21,7 +21,7 @@ export default function CreatePost() {
                 </div>
             ) : null}
 
-            <button onClick={() => setOpen(!open)} className={"border-2 p-2 rounded-lg cursor-pointer"}>Create post...
+            <button onClick={() => setOpen(!open)} className={"btn-shine"}>Create post...
             </button>
             <div className={`grid grid-cols-2 gap-4 ${open ? null : "hidden"} border-2 rounded-lg p-4`}>
                 <form onSubmit={handleSubmit} className={"flex flex-col gap-2"}>
