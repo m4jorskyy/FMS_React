@@ -36,7 +36,9 @@ export default function Layout() {
                         </button>
 
                         <div className={"absolute left-1/2 transform -translate-x-1/2"}>
-                            <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                            <a href={"/"}>
+                                <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                            </a>
                         </div>
 
                         {user ? (

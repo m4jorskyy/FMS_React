@@ -15,7 +15,7 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
 
 
     return (
-        <div className={"border-2 rounded-lg p-4 m-4 cursor-pointer w-[90vw] text-center"} onClick={() => setOpen(!open)}>
+        <div className={"border-2 rounded-lg p-4 mb-4 cursor-pointer w-[95vw] text-center"} onClick={() => setOpen(!open)}>
             <div className={"flex flex-row justify-between gap-2"}>
                 <div className={"flex flex-col items-center"}>
                     <img src={"/logo.png"} alt={"FMS"} className={"w-16 h-16"}/>
@@ -31,12 +31,13 @@ export default function OfficialMatchCard({opponents, beginAt, status, results, 
                 </div>
             </div>
 
-            <p>START <br /> {moment(beginAt).format("DD-MM-YYYY HH:mm")}</p>
+            <p>{moment(beginAt).fromNow()}</p>
 
             <p className={"text-left"}>{leagueName} <br /> {tournamentName}</p>
 
-            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
                 <hr className={"my-4"}/>
+                <p>START: {moment(beginAt).format("DD-MM-YYYY HH:mm")}</p>
                 <table className={`border-2 border-dashed border-collapse text-center`}>
                     <tbody>
                     <tr>

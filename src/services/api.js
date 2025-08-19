@@ -309,3 +309,18 @@ export async function getPosts(page = 1) {
 
     return response.json()
 }
+
+export async function getLatestPost() {
+    const response = await fetch(`/api/posts/?page=1&page_size=1`)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    const data = await response.json();
+    return data.results[0];
+}

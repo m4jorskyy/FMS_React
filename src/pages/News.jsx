@@ -13,21 +13,21 @@ export default function News() {
         <div className={"flex flex-col items-center h-[90vh]"}>
             <NewsletterForm/>
 
-            {isLoadingPosts ? (
-                <div className={"animate-l1"}>
-                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                </div>
-            ) : null}
-
-            {isErrorPosts ? (
-                <div>
-                    <Alert type={"error"} message={errorPosts}/>
-                </div>
-            ) : null}
-
-
             <div className={"flex flex-col items-center gap-3"}>
                 <h1>News</h1>
+
+                {isLoadingPosts ? (
+                    <div className={"animate-l1"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    </div>
+                ) : null}
+
+                {isErrorPosts ? (
+                    <div>
+                        <Alert type={"error"} message={errorPosts}/>
+                    </div>
+                ) : null}
+
                 {postPages.map(post =>
                     <PostCard key={post.id} title={post.title} author={post.author} date={post.date} text={post.text}/>
                 )}
