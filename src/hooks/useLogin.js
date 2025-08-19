@@ -73,7 +73,7 @@ export default function useLogin() {
         if (success) {
             const timeout = setTimeout(() => {
                 handleClose()
-                navigate("/dashboard")
+                navigate("/")
             }, 2000)
 
             return () => clearTimeout(timeout)

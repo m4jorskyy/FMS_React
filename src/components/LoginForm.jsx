@@ -37,7 +37,7 @@ export default function LoginForm() {
                 <input className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"} name={"password"} type={"password"}
                        value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br/>
-                <button type={"submit"} className={"btn-shine text-[48px]   "} disabled={loading}>LOG IN</button>
+                <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading}>LOG IN</button>
             </form>
 
         </div>

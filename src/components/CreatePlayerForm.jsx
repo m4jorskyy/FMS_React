@@ -1,7 +1,6 @@
 //CreatePlayerForm.jsx
 
 import useCreatePlayer from "../hooks/useCreatePlayer.js";
-import {X} from 'lucide-react'
 import {useState} from "react";
 import Alert from "./Alert.jsx";
 
@@ -11,31 +10,29 @@ export default function CreatePlayerForm() {
 
     return (
         <div>
-            <button onClick={() => setOpen(!open)} className={"btn-shine"}>Add player...
-            </button>
-            <div className={`${open ? null : "hidden"}`}>
-                <div>
-                    {formData.showAlert ? (
-                        <div onClick={handleClose}>
-                            <Alert type={formData.error === "" ? "success" : "error"} message={formData.error === "" ? formData.success : formData.error}/>
-                        </div>
-                    ) : null}
+            <button onClick={() => setOpen(!open)} className={"btn-shine"}>Add player</button>
+            <div className={`border-2 rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-150 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}`}>
+                {formData.showAlert ? (
+                    <div onClick={handleClose}>
+                        <Alert type={formData.error === "" ? "success" : "error"}
+                               message={formData.error === "" ? formData.success : formData.error}/>
+                    </div>
+                ) : null}
 
-                    {formData.loading ? (
-                        <div className={"animate-l1"}>
-                            <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                        </div>
-                    ) : null}
-                </div>
+                {formData.loading ? (
+                    <div className={"animate-l1"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    </div>
+                ) : null}
 
-                <form onSubmit={handleSubmit} className={"flex flex-col items-center"}>
+                <form onSubmit={handleSubmit} className={"flex flex-col gap-3 items-center p-4"}>
                     <input
                         type={"text"}
                         name={"firstName"}
                         placeholder={"First name"}
                         value={formData.firstName}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type={"text"}
@@ -43,7 +40,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Last name"}
                         value={formData.lastName}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type={"text"}
@@ -51,7 +48,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Nick"}
                         value={formData.nick}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type={"text"}
@@ -59,7 +56,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Lane"}
                         value={formData.lane}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type={"text"}
@@ -67,7 +64,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Champion"}
                         value={formData.champion}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type={"text"}
@@ -75,7 +72,7 @@ export default function CreatePlayerForm() {
                         placeholder={"Team role"}
                         value={formData.teamRole}
                         onChange={handleChange}
-                        className={"text-center"}
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
                     <input
                         type="text"
@@ -83,7 +80,7 @@ export default function CreatePlayerForm() {
                         placeholder="Twitter link"
                         value={formData.twitter}
                         onChange={handleChange}
-                        className="text-center"
+                        className="text-center animate-pulseGlow border-2 outline-none"
                     />
 
                     <input
@@ -92,7 +89,7 @@ export default function CreatePlayerForm() {
                         placeholder="YouTube link"
                         value={formData.youtube}
                         onChange={handleChange}
-                        className="text-center"
+                        className="text-center animate-pulseGlow border-2 outline-none"
                     />
 
                     <input
@@ -101,7 +98,7 @@ export default function CreatePlayerForm() {
                         placeholder="Twitch link"
                         value={formData.twitch}
                         onChange={handleChange}
-                        className="text-center"
+                        className="text-center animate-pulseGlow border-2 outline-none"
                     />
 
                     <input
@@ -110,7 +107,7 @@ export default function CreatePlayerForm() {
                         placeholder="Kick link"
                         value={formData.kick}
                         onChange={handleChange}
-                        className="text-center"
+                        className="text-center animate-pulseGlow border-2 outline-none"
                     />
 
                     <input
@@ -119,19 +116,19 @@ export default function CreatePlayerForm() {
                         placeholder="Instagram link"
                         value={formData.instagram}
                         onChange={handleChange}
-                        className="text-center"
+                        className="text-center animate-pulseGlow border-2 outline-none"
                     />
 
                     <input
-                        type="text"
-                        name="tiktok"
-                        placeholder="TikTok link"
+                        type={"text"}
+                        name={"tiktok"}
+                        placeholder={"TikTok link"}
                         value={formData.tiktok}
                         onChange={handleChange}
-                        className="text-center"
+                        className={"text-center animate-pulseGlow border-2 outline-none"}
                     />
 
-                    <button type={"submit"} className={"cursor-pointer"}>Add player</button>
+                    <button type={"submit"} className={"btn-shine"}>Add player</button>
                 </form>
             </div>
         </div>

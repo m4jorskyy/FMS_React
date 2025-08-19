@@ -26,7 +26,7 @@ export default function SoloqMatchCard({
     }
 
     return (
-        <div className={"flex flex-row justify-between rounded-lg p-2 mt-2 w-[20vw]"} style={cardStyle}>
+        <div className={"flex flex-row justify-between rounded-lg p-2 mt-2 w-[260px]"} style={cardStyle}>
             <div className={"flex flex-col items-center justify-center"}>
                 <p>{moment(game_start).fromNow()}</p>
                 <br/>
