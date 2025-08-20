@@ -1,9 +1,8 @@
 //PostCard.jsx
 
 import moment from "moment";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import {useState} from "react";
+import SafeMarkdown from "./SafeMarkdown.jsx";
 
 export default function PostCard({author, title, text, date}) {
     const [open, setOpen] = useState(false)
@@ -19,9 +18,7 @@ export default function PostCard({author, title, text, date}) {
             </div>
             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
                 <div className="p-2 overflow-auto font-sans markdown-preview">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {text}
-                    </ReactMarkdown>
+                    <SafeMarkdown content={text} />
                 </div>
             </div>
         </div>

@@ -1,8 +1,7 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import {useState} from "react";
 import useCreatePost from "../hooks/useCreatePost.js";
 import Alert from "./Alert.jsx";
+import SafeMarkdown from "./SafeMarkdown.jsx";
 
 export default function CreatePost() {
     const {formData, handleChange, handleClose, handleSubmit} = useCreatePost()
@@ -48,9 +47,7 @@ export default function CreatePost() {
                     </form>
 
                     <div className="border-2 p-2 overflow-auto font-sans markdown-preview min-h-64 rounded-lg">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {formData.text}
-                        </ReactMarkdown>
+                        <SafeMarkdown content={formData.text} />
                     </div>
                 </div>
             </div>
