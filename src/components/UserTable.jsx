@@ -137,25 +137,26 @@ export default function UserTable({
             <div
                 className={`rounded-lg flex pr-6 flex-col w-screen text-center gap-2 overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-250 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}`}>
 
-                {isError ? (
-                    <Alert type={"error"} message={error}/>
-                ) : null}
-
-                {loading || isLoading ? (
-                    <div className={"animate-l1"}>
-                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                    </div>
-                ) : null}
-
-                {deleteUserError !== "" ? (
-                    <Alert type={"error"} message={deleteUserError}/>
-                ) : null}
-
-                {success !== "" ? (
-                    <Alert type={"success"} message={success}/>
-                ) : null}
-
                 <div className={"flex flex-col border-2 rounded-lg p-2 gap-2"}>
+
+                    {isError ? (
+                        <Alert type={"error"} message={error}/>
+                    ) : null}
+
+                    {loading || isLoading ? (
+                        <div className={"animate-l1"}>
+                            <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                        </div>
+                    ) : null}
+
+                    {deleteUserError !== "" ? (
+                        <Alert type={"error"} message={deleteUserError}/>
+                    ) : null}
+
+                    {success !== "" ? (
+                        <Alert type={"success"} message={success}/>
+                    ) : null}
+
                     <h1>User Table</h1>
                     <div>
                         <input
@@ -269,7 +270,8 @@ export default function UserTable({
                         </button>
                     </div>
 
-                    <div className={`overflow-hidden w-[240px] transition-all duration-500 ease-in-out ${showEditForm ? "max-h-300 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"} text-center border-2 rounded-lg p-4`}>
+                    <div
+                        className={`overflow-hidden w-[240px] transition-all duration-500 ease-in-out ${showEditForm ? "max-h-300 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"} text-center border-2 rounded-lg p-4`}>
                         {showEditForm && editingUser && (
                             <EditUserForm user={editingUser} token={token} onSuccess={handleEditSuccess}
                                           onClose={handleCloseEditForm}/>

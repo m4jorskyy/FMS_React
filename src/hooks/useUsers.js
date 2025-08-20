@@ -6,7 +6,7 @@ import {getUsers} from "../services/api.js";
 export default function useUsers(token, options = {}){
     return useInfiniteQuery({
         queryKey: ['users'],
-        queryFn: ({pageParam} = 1) => getUsers(token, pageParam),
+        queryFn: ({pageParam} = 1) => getUsers(pageParam),
         getNextPageParam: lastPage => {
             if (!lastPage.next) return undefined
             const url = new URL(lastPage.next)

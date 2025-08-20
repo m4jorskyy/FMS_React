@@ -1,7 +1,6 @@
 //useCreatePlayer.js
 
 import {useEffect, useState} from "react";
-import {useAuth} from "../context/AuthContext.jsx";
 import {postPlayer} from "../services/api.js";
 
 export default function useCreatePlayer() {
@@ -23,8 +22,6 @@ export default function useCreatePlayer() {
         success: "",
         showAlert: false
     })
-
-    const {token} = useAuth()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -59,7 +56,6 @@ export default function useCreatePlayer() {
                 formData.kick,
                 formData.instagram,
                 formData.tiktok,
-                token
             )
 
             if (response.ok) {

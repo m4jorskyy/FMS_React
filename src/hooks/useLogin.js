@@ -1,7 +1,7 @@
 //useLogin.js
 
 import {useEffect, useState} from "react";
-import {postLogin} from "../services/api.js";
+import {getMe, postLogin} from "../services/api.js";
 import {useAuth} from "../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 
@@ -19,7 +19,6 @@ export default function useLogin() {
     const navigate = useNavigate()
 
     const handleNickChange = (e) => {
-
         setNick(e.target.value)
         setError("")
     }
@@ -34,12 +33,14 @@ export default function useLogin() {
         event.preventDefault()
         setError("")
         setSuccess("")
-
         setLoading(true)
 
         try {
-            const response = await postLogin(nick, password)
-            login(response.nick, response.token, response.role)
+            await postLogin(nick, password)
+
+            const userData = await getMe()
+
+            login(userData.nick, userData.role)
             setSuccess(thanks)
             setShowAlert(true)
             setNick("")

@@ -14,20 +14,20 @@ export default function CreatePost() {
 
             <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-300 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"} text-center border-2 rounded-lg p-4`}>
+                {formData.showAlert ? (
+                    <div onClick={handleClose}>
+                        <Alert type={formData.error === "" ? "success" : "error"}
+                               message={formData.error === "" ? formData.success : formData.error}/>
+                    </div>
+                ) : null}
+
+                {formData.loading ? (
+                    <div className={"animate-l1"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    </div>
+                ) : null}
                 <h1 className={"mb-3 mt-1"}>Create Post</h1>
                 <div className={`grid grid-cols-2 gap-4`}>
-                    {formData.showAlert ? (
-                        <div onClick={handleClose}>
-                            <Alert type={formData.error === "" ? "success" : "error"}
-                                   message={formData.error === "" ? formData.success : formData.error}/>
-                        </div>
-                    ) : null}
-
-                    {formData.loading ? (
-                        <div className={"animate-l1"}>
-                            <img src={"/src/assets/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                        </div>
-                    ) : null}
                     <form onSubmit={handleSubmit} className={"flex flex-col gap-2"}>
                         <input
                             type={"text"}

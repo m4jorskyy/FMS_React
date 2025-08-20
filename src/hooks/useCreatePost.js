@@ -2,8 +2,6 @@
 
 import {useEffect, useState} from "react";
 import {postPost} from "../services/api.js";
-import {useAuth} from "../context/AuthContext.jsx";
-import moment from "moment";
 
 export default function useCreatePost() {
     const [formData, setFormData] = useState({
@@ -13,8 +11,6 @@ export default function useCreatePost() {
         error: "",
         showAlert: false
     })
-
-    const {token, user} = useAuth()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -36,7 +32,7 @@ export default function useCreatePost() {
         }))
 
         try {
-            const response = await postPost(user, formData.title, formData.text, token)
+            const response = await postPost(formData.title, formData.text)
             if (response.ok) {
                 setFormData(prev => ({
                     ...prev,

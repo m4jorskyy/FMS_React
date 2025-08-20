@@ -1,7 +1,6 @@
 //useDeleteUser.js
 
 import {useState} from "react";
-import {useAuth} from "../context/AuthContext.jsx";
 import {deleteUser} from "../services/api.js";
 import {useQueryClient} from "@tanstack/react-query";
 
@@ -11,12 +10,11 @@ export default function useDeleteUser(){
     const [loading, setLoading] = useState(false)
 
     const queryClient = useQueryClient()
-    const {token} = useAuth()
 
     const handleDelete = async (nick) => {
         setLoading(true)
         try {
-            const response = await deleteUser(nick, token)
+            const response = await deleteUser(nick)
             setError('')
             setSuccess(response.success)
             queryClient.invalidateQueries(['users'])

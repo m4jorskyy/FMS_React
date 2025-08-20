@@ -1,8 +1,7 @@
 //useEditUser.js
 
 import {useEffect, useState} from "react";
-import {getUser, patchUser} from "../services/api.js";
-import {useAuth} from "../context/AuthContext.jsx";
+import {patchUser} from "../services/api.js";
 import {useQueryClient} from "@tanstack/react-query";
 
 export default function useEditUser(user, onSuccess) {
@@ -19,7 +18,6 @@ export default function useEditUser(user, onSuccess) {
 
     const [prevNick, setPrevNick] = useState('')
 
-    const {token} = useAuth()
     const queryClient = useQueryClient()
 
     const thanks = "Pomyślnie zmieniono dane!"
@@ -59,13 +57,13 @@ export default function useEditUser(user, onSuccess) {
         setError("")
         setSuccess("")
         if (!email.includes('@')) {
-            setError('Nieprawidłowy format adresu e-mail!')
+            setError('Wrong e-mail format!')
             setShowAlert(true)
             return
         }
 
         if (password !== passwordCheck) {
-            setError('Hasła się nie zgadzają!')
+            setError("Passwords don't match!")
             setShowAlert(true)
             return
         }
@@ -73,7 +71,7 @@ export default function useEditUser(user, onSuccess) {
         setLoading(true)
 
         try {
-            await patchUser(firstName, lastName, nick, email, password, token, prevNick)
+            await patchUser(firstName, lastName, nick, email, password, prevNick)
             setSuccess(thanks)
             setShowAlert(true)
 
@@ -99,7 +97,7 @@ export default function useEditUser(user, onSuccess) {
                     .join('\n')
                 setError(errorMessages)
             } else {
-                setError(error.message || "Coś poszło nie tak. Spróbuj ponownie.")
+                setError(error.message || "Something went wrong. Try again.")
             }
             setShowAlert(true)
         } finally {

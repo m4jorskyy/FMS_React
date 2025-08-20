@@ -2,12 +2,31 @@
 
 import Cookies from 'js-cookie'
 
-export async function getUser(nick, token) {
+export async function getMe() {
     const request = {
         method: "GET",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    const response = await fetch(`/api/me/`, request)
+
+    if (!response.ok) {
+        throw new Error("Not authenticated")
+    }
+
+    return response.json()
+}
+
+
+export async function getUser(nick) {
+    const request = {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
         }
     }
 
@@ -24,12 +43,12 @@ export async function getUser(nick, token) {
     return response.json()
 }
 
-export async function getUsers(token, page = 1) {
+export async function getUsers(page = 1) {
     const request = {
         method: "GET",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
         }
     }
 
@@ -46,12 +65,13 @@ export async function getUsers(token, page = 1) {
     return response.json()
 }
 
-export async function deleteUser(nick, token) {
+export async function deleteUser(nick) {
     const request = {
         method: "DELETE",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "X-CSRFToken": Cookies.get("csrftoken")
         }
     }
 
@@ -68,7 +88,7 @@ export async function deleteUser(nick, token) {
     return response.json()
 }
 
-export async function patchUser(firstName, lastName, nick, email, password, token, prevNick) {
+export async function patchUser(firstName, lastName, nick, email, password, prevNick) {
     const body = {
         "first_name": firstName,
         "last_name": lastName,
@@ -82,9 +102,10 @@ export async function patchUser(firstName, lastName, nick, email, password, toke
 
     const request = {
         method: "PUT",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "X-CSRFToken": Cookies.get("csrftoken")
         },
         body: JSON.stringify(body)
     }
@@ -129,12 +150,13 @@ export async function getPlayers() {
     return response.json()
 }
 
-export async function postPlayer(firstName, lastName, nick, lane, champion, teamRole, twitter, youtube, twitch, kick, instagram, tiktok, token) {
+export async function postPlayer(firstName, lastName, nick, lane, champion, teamRole, twitter, youtube, twitch, kick, instagram, tiktok) {
     const request = {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "X-CSRFToken": Cookies.get("csrftoken")
         },
         body: JSON.stringify({
             "first_name": firstName,
@@ -200,7 +222,7 @@ export async function postLogin(nick, password) {
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "X-CRSFToken": Cookies.get("crsftoken")
+            "X-CSRFToken": Cookies.get("csrftoken")
         },
         body: JSON.stringify({
             "nick": nick,
@@ -221,16 +243,17 @@ export async function postLogin(nick, password) {
     return response.json()
 }
 
-export async function getOfficialMatches(teamId, status, page = 1) {
+export async function postLogout() {
     const request = {
-        method: "GET",
+        method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${import.meta.env.VITE_PANDASCORE_API_KEY}`
+            "X-CSRFToken": Cookies.get("csrftoken")
         }
     }
 
-    const response = await fetch(`https://api.pandascore.co/lol/matches?filter[opponent_id]=${teamId}&filter[status]=${status}&page[number]=${page}&page[size]=5`, request)
+    const response = await fetch(`/api/logout/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -243,6 +266,18 @@ export async function getOfficialMatches(teamId, status, page = 1) {
     return response.json()
 }
 
+export async function getOfficialMatches(teamId, status, page = 1) {
+    const response = await fetch(`/api/officialmatches/?team_id=${teamId}&status=${status}&page=${page}`)
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+    return response.json()
+}
+
 export async function postNewsletter(email) {
 
     const request = {
@@ -250,6 +285,7 @@ export async function postNewsletter(email) {
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
+            "X-CSRFToken": Cookies.get("csrftoken")
         },
         body: JSON.stringify({
             "email": email
@@ -269,15 +305,15 @@ export async function postNewsletter(email) {
     return response.json()
 }
 
-export async function postPost(author, title, text, token) {
+export async function postPost(title, text) {
     const request = {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "X-CSRFToken": Cookies.get("csrftoken")
         },
         body: JSON.stringify({
-            "author": author,
             "title": title,
             "text": text
         })

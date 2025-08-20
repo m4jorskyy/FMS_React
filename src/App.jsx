@@ -17,8 +17,14 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+import {useEffect} from "react";
 
 export default function App() {
+
+    useEffect(() => {
+        fetch("/api/csrf/", {credentials: "include"})
+    }, [])
+
     return (
         <Routes>
             <Route path={"/"} element={<Layout/>}>
