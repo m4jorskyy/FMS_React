@@ -7,15 +7,15 @@ import CreatePlayerForm from "../components/CreatePlayerForm.jsx";
 import CreatePost from "../components/CreatePost.jsx";
 
 export default function Dashboard() {
-    const {user, role, token} = useAuth()
-    const {data: users, fetchNextPage, hasNextPage, isFetchNextPage, isLoading, error, isError} = useUsers(token, {
+    const {user, role} = useAuth()
+    const {data: users, fetchNextPage, hasNextPage, isFetchNextPage, isLoading, error, isError} = useUsers( {
         enabled: role === "ADMIN"
     })
 
     if (role === "ADMIN") return (
         <div className={"flex flex-col w-screen p-4 gap-4 h-full"}>
             <UserTable users={users} error={error} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}
-                       isFetchNextPage={isFetchNextPage} isLoading={isLoading} isError={isError} token={token}/>
+                       isFetchNextPage={isFetchNextPage} isLoading={isLoading} isError={isError}/>
             <CreatePlayerForm/>
             <CreatePost/>
         </div>
