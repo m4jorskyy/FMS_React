@@ -11,28 +11,20 @@ export function AuthProvider({children}) {
     const queryClient = useQueryClient()
 
     useEffect(() => {
-        if(user !== null) {
-            async function fetchUser() {
-                try {
-                    const data = await getMe()
-                    if (data) {
-                        setUser(data.nick)
-                        setRole(data.role)
-                    } else {
-                        setUser(null);
-                        setRole(null);
-                    }
-                } catch {
-                    setUser(null);
-                    setRole(null);
-                } finally {
-                    setLoading(false)
-                }
+        async function fetchUser() {
+            try {
+                const data = await getMe()
+                setUser(data.nick)
+                setRole(data.role)
+            } catch {
+                setUser(null)
+                setRole(null)
+            } finally {
+                setLoading(false)
             }
-
-            fetchUser()
         }
-    }, [user])
+        fetchUser()
+    }, [])
 
     const login = (userData, userRole) => {
         setUser(userData)

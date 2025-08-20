@@ -13,17 +13,8 @@ export async function getMe() {
 
     const response = await fetch(`/api/me/`, request)
 
-    if (response.status === 403) {
-        return null;
-    }
-
     if (!response.ok) {
-
-        const errorData = await response.json()
-        const error = new Error(`HTTP ${response.statusText}`)
-        error.status = response.status
-        error.data = errorData
-        throw error
+        throw new Error("Not authenticated")
     }
 
     return response.json()
