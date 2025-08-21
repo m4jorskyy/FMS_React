@@ -2,6 +2,8 @@
 
 import Cookies from 'js-cookie'
 
+const API_BASE = import.meta.env.VITE_BACKEND_URL
+
 export async function getMe() {
     const request = {
         method: "GET",
@@ -11,7 +13,7 @@ export async function getMe() {
         }
     }
 
-    const response = await fetch(`/api/me/`, request)
+    const response = await fetch(`${API_BASE}/api/me/`, request)
 
     if (!response.ok) {
         throw new Error("Not authenticated")
@@ -30,7 +32,7 @@ export async function getUser(nick) {
         }
     }
 
-    const response = await fetch(`/api/users/${nick}/`, request)
+    const response = await fetch(`${API_BASE}/api/users/${nick}/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -52,7 +54,7 @@ export async function getUsers(page = 1) {
         }
     }
 
-    const response = await fetch(`/api/users/?page=${page}`, request)
+    const response = await fetch(`${API_BASE}/api/users/?page=${page}`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -75,7 +77,7 @@ export async function deleteUser(nick) {
         }
     }
 
-    const response = await fetch(`/api/users/delete/${nick}/`, request)
+    const response = await fetch(`${API_BASE}/api/users/delete/${nick}/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -110,7 +112,7 @@ export async function patchUser(firstName, lastName, nick, email, password, prev
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`/api/users/edit/${prevNick}/`, request)
+    const response = await fetch(`${API_BASE}/api/users/edit/${prevNick}/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -124,7 +126,7 @@ export async function patchUser(firstName, lastName, nick, email, password, prev
 }
 
 export async function getMatches(nick, page = 1) {
-    const response = await fetch(`/api/players/matches/${nick}/?page=${page}`)
+    const response = await fetch(`${API_BASE}/api/players/matches/${nick}/?page=${page}`)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -137,7 +139,7 @@ export async function getMatches(nick, page = 1) {
 }
 
 export async function getPlayers() {
-    const response = await fetch(`/api/players/`)
+    const response = await fetch(`${API_BASE}/api/players/`)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -174,7 +176,7 @@ export async function postPlayer(firstName, lastName, nick, lane, champion, team
         })
     }
 
-    const response = await fetch(`/api/players/create/`, request)
+    const response = await fetch(`${API_BASE}/api/players/create/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -203,7 +205,7 @@ export async function postRegister(firstName, lastName, nick, email, password) {
         })
     }
 
-    const response = await fetch(`/api/register/`, request)
+    const response = await fetch(`${API_BASE}/api/register/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -230,7 +232,7 @@ export async function postLogin(nick, password) {
         })
     }
 
-    const response = await fetch(`/api/login/`, request)
+    const response = await fetch(`${API_BASE}/api/login/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -253,7 +255,7 @@ export async function postLogout() {
         }
     }
 
-    const response = await fetch(`/api/logout/`, request)
+    const response = await fetch(`${API_BASE}/api/logout/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -267,7 +269,7 @@ export async function postLogout() {
 }
 
 export async function getOfficialMatches(teamId, status, page = 1) {
-    const response = await fetch(`/api/officialmatches/?team_id=${teamId}&status=${status}&page=${page}`)
+    const response = await fetch(`${API_BASE}/api/officialmatches/?team_id=${teamId}&status=${status}&page=${page}`)
     if (!response.ok) {
         const errorData = await response.json()
         const error = new Error(`HTTP ${response.statusText}`)
@@ -291,7 +293,7 @@ export async function postNewsletter(email) {
         })
     }
 
-    const response = await fetch(`/api/newsletter/`, request)
+    const response = await fetch(`${API_BASE}/api/newsletter/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -318,7 +320,7 @@ export async function postPost(title, text) {
         })
     }
 
-    const response = await fetch(`/api/posts/create/`, request)
+    const response = await fetch(`${API_BASE}/api/posts/create/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -332,7 +334,7 @@ export async function postPost(title, text) {
 }
 
 export async function getPosts(page = 1) {
-    const response = await fetch(`/api/posts/?page=${page}`)
+    const response = await fetch(`${API_BASE}/api/posts/?page=${page}`)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -346,7 +348,7 @@ export async function getPosts(page = 1) {
 }
 
 export async function getLatestPost() {
-    const response = await fetch(`/api/posts/?page=1&page_size=1`)
+    const response = await fetch(`${API_BASE}/api/posts/?page=1&page_size=1`)
 
     if (!response.ok) {
         const errorData = await response.json()
@@ -361,7 +363,7 @@ export async function getLatestPost() {
 }
 
 export async function getPlayerRanks(nick) {
-    const response = await fetch(`/api/players/${nick}/ranks`)
+    const response = await fetch(`${API_BASE}/api/players/${nick}/ranks`)
 
     if (!response.ok) {
         const errorData = await response.json()
