@@ -279,7 +279,6 @@ export async function getOfficialMatches(teamId, status, page = 1) {
 }
 
 export async function postNewsletter(email) {
-
     const request = {
         method: "POST",
         credentials: "include",
@@ -359,4 +358,18 @@ export async function getLatestPost() {
 
     const data = await response.json();
     return data.results[0];
+}
+
+export async function getPlayerRanks(nick) {
+    const response = await fetch(`/api/players/${nick}/ranks`)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
 }

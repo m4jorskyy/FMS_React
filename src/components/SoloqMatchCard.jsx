@@ -12,7 +12,7 @@ export default function SoloqMatchCard({
                                            win,
                                            champion
                                        }) {
-    const ddVersion = '15.14.1'
+    const ddVersion = '15.16.1'
     const champImgUrl = `https://ddragon.leagueoflegends.com/cdn/${ddVersion}/img/champion/${champion}.png`
 
     const firstLetter = lane.charAt(0)

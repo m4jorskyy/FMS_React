@@ -2,6 +2,8 @@
 
 import useSoloqMatches from "../hooks/useSoloqMatches.js";
 import SoloqMatchCard from "./SoloqMatchCard.jsx";
+import useRanks from "../hooks/useRanks.js";
+import RankBar from "./RankBar.jsx";
 
 export default function PlayerCard({
                                        name,
@@ -16,7 +18,11 @@ export default function PlayerCard({
                                        instagram,
                                        tiktok
                                    }) {
-    const ddVersion = '15.14.1'
+    function capitalize(val) {
+        return String(val).charAt(0) + String(val).slice(1).toLowerCase();
+    }
+
+    const ddVersion = '15.16.1'
     const champImgUrl = `https://ddragon.leagueoflegends.com/cdn/${ddVersion}/img/champion/${champion}.png`
 
     const {
@@ -28,20 +34,35 @@ export default function PlayerCard({
         isFetchingNextPage
     } = useSoloqMatches(nick)
 
+    const {data: rankData, isLoading: isLoadingRanks, isError: isErrorRanks, error: errorRank} = useRanks(nick)
+
+    const rankDataFlat = Array.isArray(rankData) ? rankData : []
+
+    const rankWings = (rankDataFlat[0] !== undefined) ? `/rankWings/${capitalize(rankDataFlat[0]['tier'])}.png` : null
+
     const laneIconSrc = `/laneIcons/${lane}.png`
     const matchList = data?.pages.flatMap(page => page.results) || []
 
     return (
-        <div className={"flex flex-col items-center border-2 rounded-lg p-4 min-w-[300px]"}>
+        <div className={"flex flex-col items-center border-2 rounded-lg p-4 w-[350px]"}>
             <>
                 <h3>{name} "{nick}" {surname}</h3>
                 <img src={laneIconSrc} alt={lane} className={"w-7 h-7"}/>
                 <br/>
-                <img
-                    src={`/teamPhotos/${nick}.jpg`}
-                    alt={nick}
-                    className={"w-50 h-50 rounded-[50%] object-cover"}
-                />
+                <div className={"grid place-items-center scale-120 -mt-10 -mb-5"}>
+                    <img
+                        src={`/teamPhotos/${nick}.jpg`}
+                        alt={nick}
+                        className={"w-27 h-27 rounded-[50%] object-cover col-start-1 row-start-1"}
+                    />
+                    <img src={rankWings} alt={"rankWings"} className={"relative col-start-1 row-start-1 -top-10"}/>
+                </div>
+                <div className={"flex flex-col"}>
+                    {rankDataFlat.map(summoner => (
+                        <RankBar key={summoner.riot_id} rank={summoner.rank} tier={summoner.tier}
+                                 riotId={summoner.riot_id} leaguePoints={summoner.league_points}/>
+                    ))}
+                </div>
                 <div className={"flex flex-row gap-2 my-6"}>
 
                     {twitter && (

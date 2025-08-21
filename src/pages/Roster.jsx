@@ -52,7 +52,7 @@ export default function Roster() {
                             {coaches.map(coach => (
                                 <PlayerCard key={coach.id} name={coach.first_name} surname={coach.last_name}
                                             nick={coach.nick}
-                                            teamRole={coach.team_role} champion={coach.champion} lane={coach.lane}
+                                            champion={coach.champion} lane={coach.lane}
                                             instagram={coach.instagram} kick={coach.kick} tiktok={coach.tiktok}
                                             twitch={coach.twitch} twitter={coach.twitter} youtube={coach.youtube}/>
                             ))}
@@ -69,8 +69,7 @@ export default function Roster() {
                         <div className={"flex flex-row gap-2 overflow-x-scroll w-full items-start scrollbar-hide"}>
                             {subs.map(sub => (
                                 <PlayerCard key={sub.id} name={sub.first_name} surname={sub.last_name} nick={sub.nick}
-                                            teamRole={sub.team_role} champion={sub.champion} lane={sub.lane}
-                                            instagram={sub.instagram} kick={sub.kick} twitter={sub.twitter}
+                                            champion={sub.champion} lane={sub.lane} instagram={sub.instagram} kick={sub.kick} twitter={sub.twitter}
                                             youtube={sub.youtube} tiktok={sub.tiktok} twitch={sub.twitch}/>
                             ))}
                         </div>
