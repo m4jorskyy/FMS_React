@@ -20,10 +20,10 @@ import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import {useEffect} from "react";
 
 export default function App() {
-
+    const API_BASE = import.meta.env.VITE_BACKEND_URL
     useEffect(() => {
-        fetch("/api/csrf/", {credentials: "include"})
-    }, [])
+        fetch(`${API_BASE}/api/csrf/`, {credentials: "include"})
+    }, [API_BASE])
 
     return (
         <Routes>
