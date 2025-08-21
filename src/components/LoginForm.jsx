@@ -17,25 +17,30 @@ export default function LoginForm() {
 
     return (
         <div className={"flex flex-col justify-center items-center h-screen overflow-hidden w-full -mt-24"}>
-            {showAlert ? (
-                <div onClick={handleClose}>
-                    <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
-                </div>
-            ) : null}
-
-            {loading ? (
-                <div className={"animate-l1"}>
-                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                </div>
-            ) : null}
-
             <form onSubmit={handleLogin} className={"flex flex-col items-center justify-center gap-3"}>
                 <h1 className={"text-[64px] px-4 text-center"}>Whispers know your name</h1>
+                {showAlert ? (
+                    <div onClick={handleClose}>
+                        <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
+                    </div>
+                ) : null}
+
+                {loading ? (
+                    <div className={"animate-l1"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    </div>
+                ) : null}
+
                 <br/>
-                <input className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"} name={"nick"} type={"text"} value={nick}
-                       onChange={handleNickChange} placeholder={"Nick"}/>
-                <input className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"} name={"password"} type={"password"}
-                       value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
+
+                <input
+                    className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    name={"nick"} type={"text"} value={nick}
+                    onChange={handleNickChange} placeholder={"Nick"}/>
+                <input
+                    className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    name={"password"} type={"password"}
+                    value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br/>
                 <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading}>LOG IN</button>
             </form>

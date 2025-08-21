@@ -2,6 +2,7 @@
 
 import {useState} from "react";
 import {useAuth} from "../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function useLogout() {
     const [loading, setLoading] = useState(false)
@@ -10,13 +11,15 @@ export default function useLogout() {
     const { logout } = useAuth()
 
     const thanks = "Logged out successfully"
+    const navigate = useNavigate()
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         setLoading(true)
 
         try {
-            logout()
+            await logout()
             setSuccess(thanks)
+            navigate("/")
         } catch (error) {
             setError(error.message || "Something went wrong. Try again.")
         } finally {

@@ -14,7 +14,14 @@ export default function Layout() {
 
     return (
         <>
-            <header className={"fixed -top-1 left-0 right-0 z-50 bg-[#140000] border-b border-[#f6223d]"}>
+            {loading ? (
+                <div className={"fixed top-0 left-0 w-screen h-screen z-49 backdrop-blur-lg pointer-events-auto"}>
+                    <div className={"fixed animate-l1 left-1/2 transform -translate-x-1/2 top-1/2 backdrop-blur-lg -translate-y-1/2"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-50 h-50 z-50 pointer-events-none"}/>
+                    </div>
+                </div>
+            ) : null}
+            <header className={"fixed -top-1 left-0 right-0 z-40 bg-[#140000] border-b border-[#f6223d]"}>
                 <nav className={"flex flex-col"}>
                     <div className={"flex flex-row w-full justify-between items-center p-4"}>
                         <button
@@ -46,7 +53,7 @@ export default function Layout() {
                                 disabled={loading}
                                 className={"text-white hover:text-[#f6223d] transition-colors px-3 py-1"}
                             >
-                                {loading ? "Loading..." : <LogOut/>}
+                                <LogOut/>
                             </button>
                         ) : (
                             <button
@@ -71,7 +78,7 @@ export default function Layout() {
             </header>
 
             <div
-                className={`fixed top-0 right-0 h-full w-80 bg-[#140000] text-[24px] z-40 transform transition-transform duration-300 ease-in-out ${
+                className={`fixed top-0 right-0 h-full w-80 bg-[#140000] text-[24px] z-30 transform transition-transform duration-300 ease-in-out ${
                     openLogin ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                 <div className={"flex flex-col pt-24 px-6 gap-4"}>
@@ -93,7 +100,7 @@ export default function Layout() {
             </div>
 
             <div
-                className={`fixed top-0 left-0 h-full text-[24px] w-80 bg-[#140000] z-40 transform transition-transform duration-300 ease-in-out ${
+                className={`fixed top-0 left-0 h-full text-[24px] w-80 bg-[#140000] z-30 transform transition-transform duration-300 ease-in-out ${
                     openMenu ? 'translate-x-0' : '-translate-x-full'
                 }`}>
                 <div className={"flex flex-col pt-24 overflow-y-auto scrollbar-hide h-full px-4"}>
@@ -179,14 +186,14 @@ export default function Layout() {
 
             {openMenu && (
                 <div
-                    className={"fixed inset-0 backdrop-blur-lg bg-opacity-50 z-30"}
+                    className={"fixed inset-0 backdrop-blur-lg bg-opacity-50 z-20"}
                     onClick={() => setOpenMenu(false)}
                 />
             )}
 
             {openLogin && (
                 <div
-                    className={"fixed inset-0 backdrop-blur-lg bg-opacity-50 z-30"}
+                    className={"fixed inset-0 backdrop-blur-lg bg-opacity-50 z-20"}
                     onClick={() => setOpenLogin(false)}
                 />
             )}

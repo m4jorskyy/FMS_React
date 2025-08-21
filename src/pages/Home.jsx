@@ -37,8 +37,8 @@ export default function Home() {
 
     return (
         <div className={"flex flex-col items-center gap-4 text-center"}>
-            <h1 className={"text-[40px] px-4"}>{user !== null ? "Welcome back, " + user : "Welcome to the shadows"}</h1>
-            <div>
+            <h1 className={"text-[40px] px-4"}>{user !== null ? `Welcome back, ${user}` : "Welcome to the shadows "}</h1>
+            <div className={"flex flex-col items-center"}>
                 <h1>Latest news</h1>
                 {isErrorPost ? (
                     <Alert type={"error"} message={errorPost}/>
@@ -64,7 +64,7 @@ export default function Home() {
                 ) : isLoadingPost ? null : "No news"}
             </div>
 
-            <div>
+            <div className={"flex flex-col items-center"}>
                 <h1>Running match</h1>
                 {isErrorRunning ? (
                     <Alert type={"error"} message={errorRunning}/>
@@ -87,7 +87,7 @@ export default function Home() {
                 ) : isLoadingRunning ? null : "No running match"}
             </div>
 
-            <div>
+            <div className={"flex flex-col items-center"}>
                 <h1>Upcoming match</h1>
                 {isErrorUpcoming ? (
                     <Alert type={"error"} message={errorUpcoming}/>

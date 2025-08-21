@@ -10,7 +10,7 @@ export default function News() {
 
     const postPages = posts?.pages.flatMap(page => page.results) || []
     return (
-        <div className={"flex flex-col items-center h-[90vh]"}>
+        <div className={"flex flex-col items-center min-h-[90vh] mb-2"}>
             <NewsletterForm/>
 
             <div className={"flex flex-col items-center gap-3"}>

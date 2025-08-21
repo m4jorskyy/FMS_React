@@ -79,61 +79,61 @@ button {
 }
 
 @keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
-  }
-  50% {
-    box-shadow: 0 0 10px #f6223d, 0 0 20px #f6223d, 0 0 40px #f6223d;
-  }
-  100% {
-    box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
-  }
+    0% {
+        box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
+    }
+    50% {
+        box-shadow: 0 0 10px #f6223d, 0 0 20px #f6223d, 0 0 40px #f6223d;
+    }
+    100% {
+        box-shadow: 0 0 5px #f6223d, 0 0 10px #f6223d, 0 0 20px #f6223d;
+    }
 }
 
 .btn-shine {
-  position: relative;
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid #f6223d;
-  color: #f6223d;
-  background: transparent;
-  font-weight: bold;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  animation: pulseGlow 2s infinite;
+    position: relative;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #f6223d;
+    color: #f6223d;
+    background: transparent;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: pulseGlow 2s infinite;
 }
 
 .btn-shine:hover {
-  background: #f6223d;
-  color: #140000;
-  animation: none;
-  box-shadow: 0 0 15px #f6223d, 0 0 30px #f6223d, 0 0 60px #f6223d;
+    background: #f6223d;
+    color: #140000;
+    animation: none;
+    box-shadow: 0 0 15px #f6223d, 0 0 30px #f6223d, 0 0 60px #f6223d;
 }
 
 .btn-shine::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 50px;
-  height: 200%;
-  background: white;
-  opacity: 0.2;
-  transform: rotate(25deg);
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 50px;
+    height: 200%;
+    background: white;
+    opacity: 0.2;
+    transform: rotate(25deg);
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .btn-shine:hover::after {
-  left: 120%;
+    left: 120%;
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+    display: none; /* Safari and Chrome */
 }
