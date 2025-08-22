@@ -220,7 +220,7 @@ export async function getPlayerRanks(nick) {
 }
 
 export async function getMatches(nick, page = 1) {
-    const response = await fetch(`${API_BASE}/api/players/matches/${nick}/?page=${page}`)
+    const response = await fetch(`${API_BASE}/api/players/${nick}/matches/?page=${page}`)
 
     if (!response.ok) {
         const errorData = await response.json()
