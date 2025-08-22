@@ -10,7 +10,6 @@ export default function CreatePost() {
     return (
         <div>
             <button onClick={() => setOpen(!open)} className={"btn-shine"}>Create post</button>
-
             <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-300 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"} text-center border-2 rounded-lg p-4`}>
                 {formData.showAlert ? (

@@ -14,8 +14,7 @@ export default function CreatePlayerForm() {
             <div className={`border-2 rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-150 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}`}>
                 {formData.showAlert ? (
                     <div onClick={handleClose}>
-                        <Alert type={formData.error === "" ? "success" : "error"}
-                               message={formData.error === "" ? formData.success : formData.error}/>
+                        <Alert type={formData.error === "" ? "success" : "error"} message={formData.error === "" ? formData.success : formData.error}/>
                     </div>
                 ) : null}
 

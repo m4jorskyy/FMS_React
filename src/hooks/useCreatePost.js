@@ -23,6 +23,24 @@ export default function useCreatePost() {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
+        if (!formData.title.trim()) {
+            setFormData(prev => ({
+                ...prev,
+                error: "Title is required",
+                showAlert: true
+            }))
+            return
+        }
+
+        if (!formData.text.trim()) {
+            setFormData(prev => ({
+                ...prev,
+                error: "Content is required",
+                showAlert: true
+            }))
+            return
+        }
+
         setFormData(prev => ({
             ...prev,
             loading: true,
@@ -92,6 +110,15 @@ export default function useCreatePost() {
             return () => clearTimeout(timer)
         }
     }, [formData.success])
+
+    useEffect(() => {
+        if (formData.error) {
+            const timer = setTimeout(() => {
+                handleClose()
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [formData.error])
 
     return {
         formData,

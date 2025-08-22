@@ -28,21 +28,19 @@ export default function RegisterForm() {
     return (
         <div className={"flex flex-col items-center w-full min-h-screen scrollbar-hide z-0"}>
 
-            {showAlert ? (
-                <div onClick={handleClose}>
-                    <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
-                </div>
-            ) : null}
-
-            {loading ? (
-                <div className={"animate-l1"}>
-                    <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
-                </div>
-            ) : null}
-
             <form onSubmit={handleSubmit} className={"flex flex-col items-center justify-center gap-4"}>
                 <h1 className={"text-[64px] px-4 text-center"}>Carve your name in the shadow</h1>
-                <br/>
+                {showAlert ? (
+                    <div onClick={handleClose}>
+                        <Alert type={error === "" ? "success" : "error"} message={error === "" ? success : error}/>
+                    </div>
+                ) : null}
+
+                {loading ? (
+                    <div className={"animate-l1"}>
+                        <img src={"/logo.png"} alt={"Logo"} className={"w-20 h-20"}/>
+                    </div>
+                ) : null}
                 <input
                     type="text"
                     value={firstName}

@@ -1,6 +1,6 @@
 //Alert.jsx
 
-import {AlertTriangle, CheckCircle2, XCircle, Info, X} from "lucide-react";
+import {AlertTriangle, CheckCircle2, XCircle, Info} from "lucide-react";
 
 export default function Alert({type = "info", message}) {
     const styles = {
@@ -24,12 +24,12 @@ export default function Alert({type = "info", message}) {
 
     return (
         <div
-            className={`flex items-center gap-3 px-4 py-3 rounded-md shadow-md 
+            className={`flex items-center gap-3 px-4 py-3 m-4 rounded-md shadow-md 
                   bg-[#140000]-900 border-2 text-gray-100 ${styles[type].border}
                   animate-slideIn`}
         >
             {styles[type].icon}
-            <span className="flex-1">{message}</span>
+            <span className="flex-1 whitespace-pre-line">{message}</span>
         </div>
     )
 

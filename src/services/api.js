@@ -330,7 +330,7 @@ export async function postPost(title, text) {
         throw error
     }
 
-    return response.json()
+    return response
 }
 
 export async function getPosts(page = 1) {
@@ -359,7 +359,7 @@ export async function getLatestPost() {
     }
 
     const data = await response.json();
-    return data.results[0];
+    return data.results[0] || null;
 }
 
 export async function getPlayerRanks(nick) {

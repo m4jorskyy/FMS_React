@@ -28,9 +28,9 @@ export default function News() {
                     </div>
                 ) : null}
 
-                {postPages.map(post =>
+                {postPages.length > 0 ? postPages.map(post =>
                     <PostCard key={post.id} title={post.title} author={post.author} date={post.date} text={post.text}/>
-                )}
+                ) : "No news"}
             </div>
 
         </div>

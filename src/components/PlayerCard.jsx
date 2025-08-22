@@ -103,7 +103,7 @@ export default function PlayerCard({
 
 
                 </div>
-                Main:
+                Favourite:
                 <img
                     src={champImgUrl}
                     alt={champion}
