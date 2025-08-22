@@ -38,7 +38,7 @@ export default function PlayerCard({
 
     const rankDataFlat = Array.isArray(rankData) ? rankData : []
 
-    const rankWings = (rankDataFlat[0] !== undefined) ? `/rankWings/${capitalize(rankDataFlat[0]['tier'])}.png` : null
+    const rankWings = (!isLoadingRanks && rankDataFlat[0] !== undefined) ? `/rankWings/${capitalize(rankDataFlat[0]['tier'])}.png` : null
 
     const laneIconSrc = `/laneIcons/${lane}.png`
     const matchList = data?.pages.flatMap(page => page.results) || []
@@ -55,7 +55,10 @@ export default function PlayerCard({
                         alt={nick}
                         className={"w-27 h-27 rounded-[50%] object-cover col-start-1 row-start-1"}
                     />
-                    <img src={rankWings} alt={"rankWings"} className={"relative col-start-1 row-start-1 -top-10"}/>
+                    {rankWings !== null ? (
+                        <img src={rankWings} alt={"rankWings"}
+                             className={"relative col-start-1 row-start-1 -top-10"}/>
+                    ) : null}
                 </div>
                 <div className={"flex flex-col"}>
                     {rankDataFlat.map(summoner => (
