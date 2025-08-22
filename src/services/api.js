@@ -77,7 +77,7 @@ export async function deleteUser(nick) {
         }
     }
 
-    const response = await fetch(`${API_BASE}/api/users/delete/${nick}/`, request)
+    const response = await fetch(`${API_BASE}/api/users/${nick}/delete/`, request)
 
     if (!response.ok) {
         const errorData = await response.json()
