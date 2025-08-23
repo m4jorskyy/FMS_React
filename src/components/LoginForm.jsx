@@ -42,7 +42,7 @@ export default function LoginForm() {
                     name={"password"} type={"password"}
                     value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br/>
-                <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading}>LOG IN</button>
+                <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading || success}>LOG IN</button>
             </form>
 
         </div>
