@@ -45,7 +45,7 @@ export default function Roster() {
                 <br/>
 
                 {coaches.length ? (
-                    <div>
+                    <div className={"flex flex-col items-center"}>
                         <h1 className={"text-[48px]"}>Coaches</h1>
                         <br/>
                         <div className={"flex flex-row gap-2 overflow-x-scroll w-full items-start scrollbar-hide"}>

@@ -30,6 +30,7 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
         lastName,
         email,
         nick,
+        role,
         password,
         passwordCheck,
         error,
@@ -42,6 +43,7 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
         handleLastNameChange,
         handleNickChange,
         handleEmailChange,
+        handleRoleChange,
         handlePasswordChange,
         handlePasswordCheckChange
     } = useEditUser(userDetails || {}, handleEditSuccess)
@@ -104,6 +106,15 @@ export default function EditUserForm({user, token, onSuccess, onClose}) {
                     type="text"
                     value={nick}
                     onChange={handleNickChange}
+                    required
+                    disabled={loading}
+                    className={"text-center animate-pulseGlow"}
+                    placeholder={"Nick"}
+                />
+                <input
+                    type="text"
+                    value={role}
+                    onChange={handleRoleChange}
                     required
                     disabled={loading}
                     className={"text-center animate-pulseGlow"}

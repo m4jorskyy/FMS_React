@@ -9,6 +9,7 @@ export default function useEditUser(user, onSuccess) {
     const [lastName, setLastName] = useState(user.last_name || '')
     const [nick, setNick] = useState(user.nick || '')
     const [email, setEmail] = useState(user.email || '')
+    const [role, setRole] = useState(user.role || '')
     const [password, setPassword] = useState('')
     const [passwordCheck, setPasswordCheck] = useState('')
     const [error, setError] = useState("")
@@ -20,7 +21,7 @@ export default function useEditUser(user, onSuccess) {
 
     const queryClient = useQueryClient()
 
-    const thanks = "Pomyślnie zmieniono dane!"
+    const thanks = "User changed successfully"
 
     const handleFirstNameChange = (e) => {
         setFirstName(e.target.value)
@@ -39,6 +40,11 @@ export default function useEditUser(user, onSuccess) {
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
+        setError("")
+    }
+
+    const handleRoleChange = (e) => {
+        setRole(e.target.value)
         setError("")
     }
 
@@ -71,7 +77,7 @@ export default function useEditUser(user, onSuccess) {
         setLoading(true)
 
         try {
-            await patchUser(firstName, lastName, nick, email, password, prevNick)
+            await patchUser(firstName, lastName, nick, email, role, password, prevNick)
             setSuccess(thanks)
             setShowAlert(true)
 
@@ -88,6 +94,7 @@ export default function useEditUser(user, onSuccess) {
             setLastName("")
             setNick("")
             setEmail("")
+            setRole("")
             setPassword("")
             setPasswordCheck("")
         } catch (error) {
@@ -122,6 +129,7 @@ export default function useEditUser(user, onSuccess) {
             setLastName(user.last_name || '')
             setNick(user.nick || '')
             setEmail(user.email || '')
+            setRole(user.role || '')
             setPassword(user.password || '')
             setPasswordCheck(user.password || '')
         }
@@ -138,6 +146,7 @@ export default function useEditUser(user, onSuccess) {
         lastName,
         email,
         nick,
+        role,
         password,
         passwordCheck,
         error,
@@ -150,6 +159,7 @@ export default function useEditUser(user, onSuccess) {
         handleLastNameChange,
         handleNickChange,
         handleEmailChange,
+        handleRoleChange,
         handlePasswordChange,
         handlePasswordCheckChange
     }

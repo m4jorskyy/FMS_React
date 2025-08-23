@@ -97,12 +97,13 @@ export async function deleteUser(nick) {
     return response.json()
 }
 
-export async function patchUser(firstName, lastName, nick, email, password, prevNick) {
+export async function patchUser(firstName, lastName, nick, email, role, password, prevNick) {
     const body = {
         "first_name": firstName,
         "last_name": lastName,
         "nick": nick,
         "email": email,
+        "role": role
     }
 
     if (password) {
