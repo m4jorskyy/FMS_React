@@ -27,14 +27,12 @@ export default function PlayerCard({
 
     const {
         data,
-        isLoading,
-        isError,
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage
     } = useSoloqMatches(nick)
 
-    const {data: rankData, isLoading: isLoadingRanks, isError: isErrorRanks, error: errorRank} = useRanks(nick)
+    const {data: rankData, isLoading: isLoadingRanks} = useRanks(nick)
 
     const rankDataFlat = Array.isArray(rankData) ? rankData : []
 

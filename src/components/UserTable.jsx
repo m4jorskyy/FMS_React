@@ -4,6 +4,8 @@ import useDeleteUser from "../hooks/useDeleteUser.js";
 import EditUserForm from "./EditUserForm.jsx";
 import {Trash2, Pencil} from 'lucide-react';
 import Alert from "./Alert.jsx";
+import useConfirmation from "../hooks/useConfirmation.js";
+import ConfirmationAlert from "./ConfirmationAlert.jsx";
 
 export default function UserTable({
                                       users,
@@ -40,6 +42,20 @@ export default function UserTable({
         () => debounce((value) => setDebouncedSearch(value), 300),
         []
     )
+
+    const [deleteUser, setDeleteUser] = useState(null)
+
+    const {
+        isConfirmationOpen,
+        openConfirmation,
+        closeConfirmation,
+        handleConfirmation
+    } = useConfirmation(() => {
+        if (deleteUser) {
+            handleDelete(deleteUser)
+            setDeleteUser(null)
+        }
+    })
 
     useEffect(() => {
         debouncedSetSearch(searchTerm)
@@ -157,6 +173,12 @@ export default function UserTable({
                         <Alert type={"success"} message={success}/>
                     ) : null}
 
+                    {isConfirmationOpen ? (
+                        <ConfirmationAlert message={"Do you want to delete this user?"}
+                                           onConfirm={handleConfirmation}
+                                           onClose={closeConfirmation} isOpen={isConfirmationOpen}/>
+                    ) : null}
+
                     <h1>User Table</h1>
                     <div>
                         <input
@@ -233,7 +255,10 @@ export default function UserTable({
                                     <td className={"border-2 border-dashed p-2"}>{user.email}</td>
                                     <td className={"border-2 border-dashed p-2"}>{user.role}</td>
                                     <td className={"border-2 border-dashed p-2"}>
-                                        <button onClick={() => handleDelete(user.nick)} className={"btn-shine"}>
+                                        <button onClick={() => {
+                                            setDeleteUser(user.nick)
+                                            openConfirmation()
+                                        }} className={"btn-shine"}>
                                             <Trash2/>
                                         </button>
                                     </td>

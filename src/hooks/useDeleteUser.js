@@ -1,6 +1,6 @@
 //useDeleteUser.js
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {deleteUser} from "../services/api.js";
 import {useQueryClient} from "@tanstack/react-query";
 
@@ -24,6 +24,26 @@ export default function useDeleteUser(){
             setLoading(false)
         }
     }
+
+    const handleClose = () => {
+        setError('')
+        setSuccess('')
+    }
+
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => handleClose(), 3000)
+            return () => clearTimeout(timer)
+        }
+    }, [success])
+
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => handleClose(), 3000)
+            return () => clearTimeout(timer)
+        }
+    }, [error])
+
 
     return {
         error, success, loading, handleDelete

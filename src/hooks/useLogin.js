@@ -21,12 +21,13 @@ export default function useLogin() {
     const handleNickChange = (e) => {
         setNick(e.target.value)
         setError("")
+        setShowAlert(false)
     }
 
     const handlePasswordChange = (e) => {
-
         setPassword(e.target.value)
         setError("")
+        setShowAlert(false)
     }
 
     const handleLogin = async (event) => {

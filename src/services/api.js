@@ -183,13 +183,13 @@ export async function postPlayer(firstName, lastName, nick, lane, champion, team
             "nick": nick,
             "lane": lane,
             "champion": champion,
-            "team_role": teamRole,
-            "twitter": twitter,
-            "youtube": youtube,
-            "twitch": twitch,
-            "kick": kick,
-            "instagram": instagram,
-            "tiktok": tiktok
+            "team_role": teamRole || '',
+            "twitter": twitter || '',
+            "youtube": youtube || '',
+            "twitch": twitch || '',
+            "kick": kick || '',
+            "instagram": instagram || '',
+            "tiktok": tiktok || ''
         })
     }
 

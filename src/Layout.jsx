@@ -5,12 +5,21 @@ import {useAuth} from "./context/AuthContext.jsx";
 import useLogout from "./hooks/useLogout.js";
 import {useState} from "react";
 import {AlignJustify, LogIn, X, LogOut} from "lucide-react";
+import ConfirmationAlert from "./components/ConfirmationAlert.jsx";
+import useConfirmation from "./hooks/useConfirmation.js";
 
 export default function Layout() {
     const {user} = useAuth()
     const {handleLogout, loading} = useLogout()
     const [openMenu, setOpenMenu] = useState(false)
     const [openLogin, setOpenLogin] = useState(false)
+
+    const {
+        isConfirmationOpen,
+        openConfirmation,
+        closeConfirmation,
+        handleConfirmation
+    } = useConfirmation(handleLogout)
 
     return (
         <>
@@ -21,6 +30,11 @@ export default function Layout() {
                     </div>
                 </div>
             ) : null}
+
+            {isConfirmationOpen ? (
+                <ConfirmationAlert message={"Do you wanna log out?"} onConfirm={handleConfirmation} isOpen={isConfirmationOpen} onClose={closeConfirmation}/>
+            ) : null}
+
             <header className={"fixed -top-1 left-0 right-0 z-40 bg-[#140000] border-b border-[#f6223d]"}>
                 <nav className={"flex flex-col"}>
                     <div className={"flex flex-row w-full justify-between items-center p-4"}>
@@ -49,7 +63,7 @@ export default function Layout() {
 
                         {user ? (
                             <button
-                                onClick={handleLogout}
+                                onClick={openConfirmation}
                                 disabled={loading}
                                 className={"text-white hover:text-[#f6223d] transition-colors px-3 py-1"}
                             >
