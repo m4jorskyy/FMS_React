@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: 'RustyAttack';
-    src: url("/fonts/RustyAttack.otf") format('opentype');
+    src: url("/fonts/RubikDistressed-Regular.ttf") format('truetype');
 }
 
 @theme {
@@ -136,4 +136,8 @@ button {
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
+}
+
+.official-stat {
+    @apply flex flex-col items-center justify-center bg-[#f6223d] text-[#140000] p-2 rounded-lg
 }

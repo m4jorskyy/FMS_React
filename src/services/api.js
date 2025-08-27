@@ -376,3 +376,37 @@ export async function getPosts(page = 1) {
 
     return response.json()
 }
+
+export async function getOfficialStatsOptions(nick){
+    const response = await fetch(`${API_BASE}/api/players/${nick}/official_stats/options/`)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function getOfficialStats(page=1, nick, champion=null, year=null, tournament=null, teamVs=null) {
+    const params = new URLSearchParams({page: page.toString()})
+
+    if(champion) params.append('champion', champion)
+    if(year) params.append('year', year)
+    if(tournament) params.append('tournament', tournament)
+    if(teamVs) params.append('team_vs', teamVs)
+
+    const response = await fetch(`${API_BASE}/api/players/${nick}/official_stats/?${params.toString()}`)
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        const error = new Error(`HTTP ${response.statusText}`)
+        error.status = response.status
+        error.data = errorData
+        throw error
+    }
+    return response.json()
+}

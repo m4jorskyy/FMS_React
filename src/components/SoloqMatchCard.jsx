@@ -22,11 +22,11 @@ export default function SoloqMatchCard({
 
     const laneIconSrc = `/laneIcons/${lane}.png`
     const cardStyle = {
-        backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e", color: win === "true" ? "#2e2e2e" : "#f6223d"
+        backgroundColor: win === "true" ? "#f6223d" : "#2e2e2e", color: win === "true" ? "#140000" : "#f6223d"
     }
 
     return (
-        <div className={"flex flex-row justify-between rounded-lg p-2 mt-2 w-[280px]"} style={cardStyle}>
+        <div className={"flex flex-row justify-between rounded-lg p-2 mt-2 w-[320px]"} style={cardStyle}>
             <div className={"flex flex-col items-center justify-center"}>
                 <p>{moment(game_start).fromNow()}</p>
                 <br/>
