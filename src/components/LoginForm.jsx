@@ -36,13 +36,18 @@ export default function LoginForm() {
                 <input
                     className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                     name={"nick"} type={"text"} value={nick}
-                    onChange={handleNickChange} placeholder={"Nick"}/>
+                    onChange={handleNickChange} placeholder={"Nick"}
+                    required
+                />
                 <input
                     className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                     name={"password"} type={"password"}
-                    value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
+                    value={password} onChange={handlePasswordChange} placeholder={"Password"}
+                    required
+                />
                 <br/>
-                <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading || success}>LOG IN</button>
+                <button type={"submit"} className={"btn-shine text-[48px]"} disabled={loading || success}>LOG IN
+                </button>
             </form>
 
         </div>
