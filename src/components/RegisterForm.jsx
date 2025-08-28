@@ -47,8 +47,8 @@ export default function RegisterForm() {
                     onChange={handleFirstNameChange}
                     required
                     disabled={loading}
-                    placeholder={"first name"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    placeholder={"First name"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
 
                 <input
@@ -57,8 +57,8 @@ export default function RegisterForm() {
                     onChange={handleLastNameChange}
                     required
                     disabled={loading}
-                    placeholder={"last name"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    placeholder={"Last name"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
 
 
@@ -68,8 +68,8 @@ export default function RegisterForm() {
                     onChange={handleEmailChange}
                     required
                     disabled={loading}
-                    placeholder={"email"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    placeholder={"E-mail"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
 
 
@@ -79,8 +79,8 @@ export default function RegisterForm() {
                     onChange={handleNickChange}
                     required
                     disabled={loading}
-                    placeholder={"nick"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    placeholder={"Nick"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
 
                 <input
@@ -89,8 +89,8 @@ export default function RegisterForm() {
                     onChange={handlePasswordChange}
                     required
                     disabled={loading}
-                    placeholder={"password"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    placeholder={"Password"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
 
                 <input
@@ -100,11 +100,11 @@ export default function RegisterForm() {
                     required
                     disabled={loading}
                     placeholder={"Password check"}
-                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    className={"placeholder: text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                 />
                 <br/>
 
-                <button type="submit" disabled={loading} className={"btn-shine text-[48px]"}>REGISTER</button>
+                <button type="submit" disabled={loading} className={"btn-shine text-[48px] mb-8"}>REGISTER</button>
             </form>
         </div>
     )

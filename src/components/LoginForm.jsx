@@ -34,11 +34,11 @@ export default function LoginForm() {
                 <br/>
 
                 <input
-                    className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    className={"text-center placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                     name={"nick"} type={"text"} value={nick}
                     onChange={handleNickChange} placeholder={"Nick"}/>
                 <input
-                    className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px]"}
+                    className={"text-center mt-2 placeholder:text-center animate-pulseGlow border-2 outline-none text-[32px] w-[95vw] sm:w-[30vw]"}
                     name={"password"} type={"password"}
                     value={password} onChange={handlePasswordChange} placeholder={"Password"}/>
                 <br/>
