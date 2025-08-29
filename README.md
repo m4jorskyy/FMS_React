@@ -21,8 +21,6 @@ https://app.fms-project.fun/
 - [API Endpoints](#-api-endpoints)
 - [Showcase Highlights](#-showcase-highlights)
 
-
-
 ## ✨ **Features**
 
 ### 🏆 **Team Management**
@@ -181,17 +179,6 @@ VITE_BACKEND_URL=https://your-backend-api.com
 - **Champion icons** from Riot API
 - **Match timeline** with game details
 - **Markdown rendering** with sanitization
-
-
-
-## 🎮 **Demo Accounts**
-
-| Role | Username | Password |
-|------|----------|----------|
-| Admin | admin | admin123 |
-| Editor | editor | editor123 |
-| User | user | user123 |
-
 
 
 ## 📄 **License**
