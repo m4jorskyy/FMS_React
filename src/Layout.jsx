@@ -13,6 +13,7 @@ export default function Layout() {
     const {handleLogout, loading} = useLogout()
     const [openMenu, setOpenMenu] = useState(false)
     const [openLogin, setOpenLogin] = useState(false)
+    const [openDisclamer, setOpenDisclamer] = useState(true)
 
     const {
         isConfirmationOpen,
@@ -23,16 +24,41 @@ export default function Layout() {
 
     return (
         <>
+            {openDisclamer ? (
+                <div className={"fixed top-0 left-0 w-screen h-screen z-49 backdrop-blur-lg pointer-events-auto"}>
+                    <div
+                        className={"fixed left-1/2 transform -translate-x-1/2 top-1/2 backdrop-blur-lg -translate-y-1/2 text-center w-[75vw]"}>
+                        <div className={"flex flex-col items-center justify-center"}>
+                            <div className={"border-2 rounded-lg p-2 mb-4 bg-[#140000]"}>
+                                This website serves as a personal portfolio and educational showcase.<br/><br/>
+                                No commercial activities are conducted here, and no financial profit is generated.
+                                <br/><br/>
+                                <strong>Please DO NOT use real personal data when testing features on this site.
+                                    Use fictional information for registration and contact forms.</strong>
+                                <br/><br/>
+                                Any third-party content is used solely for demonstration purposes under fair use
+                                provisions.
+                            </div>
+                            <button onClick={() => setOpenDisclamer(false)} className={"btn-shine"}>
+                                I Understand
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+
             {loading ? (
                 <div className={"fixed top-0 left-0 w-screen h-screen z-49 backdrop-blur-lg pointer-events-auto"}>
-                    <div className={"fixed animate-l1 left-1/2 transform -translate-x-1/2 top-1/2 backdrop-blur-lg -translate-y-1/2"}>
+                    <div
+                        className={"fixed animate-l1 left-1/2 transform -translate-x-1/2 top-1/2 backdrop-blur-lg -translate-y-1/2"}>
                         <img src={"/logo.png"} alt={"Logo"} className={"w-50 h-50 z-50 pointer-events-none"}/>
                     </div>
                 </div>
             ) : null}
 
             {isConfirmationOpen ? (
-                <ConfirmationAlert message={"Do you wanna log out?"} onConfirm={handleConfirmation} isOpen={isConfirmationOpen} onClose={closeConfirmation}/>
+                <ConfirmationAlert message={"Do you wanna log out?"} onConfirm={handleConfirmation}
+                                   isOpen={isConfirmationOpen} onClose={closeConfirmation}/>
             ) : null}
 
             <header className={"fixed -top-1 left-0 right-0 z-40 bg-[#140000] border-b border-[#f6223d]"}>
