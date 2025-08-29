@@ -241,6 +241,9 @@ export default function Layout() {
             <main className={"flex flex-col justify-center items-center overflow-hidden pt-24"}>
                 <Outlet/>
             </main>
+            <footer className={"text-center text-[8px]"}>
+                © 2025 Igor Suchodolski <br />Portfolio project - not for commercial use.
+            </footer>
         </>
     );
 }
