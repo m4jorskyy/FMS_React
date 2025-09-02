@@ -39,6 +39,19 @@ export default function Layout() {
                                 Any third-party content is used solely for demonstration purposes under fair use
                                 provisions.
                             </div>
+                            <div className={"border-2 rounded-lg p-2 mb-4 bg-[#140000]"}>
+                                Also if something is loading, give it time.
+                                <br/>
+                                <br/>
+                                Server is deployed on Render Platform with Free Tier that
+                                <br/>
+                                turns server off and on first
+                                request it needs to be turned on.
+                                <br/>
+                                <br/>This takes time.
+                                <br/>
+                                <strong>Thank you for your patience! </strong>
+                            </div>
                             <button onClick={() => setOpenDisclamer(false)} className={"btn-shine"}>
                                 I Understand
                             </button>
@@ -242,7 +255,7 @@ export default function Layout() {
                 <Outlet/>
             </main>
             <footer className={"text-center text-[8px]"}>
-                © 2025 Igor Suchodolski <br />Portfolio project - not for commercial use.
+                © 2025 Igor Suchodolski <br/>Portfolio project - not for commercial use.
             </footer>
         </>
     );

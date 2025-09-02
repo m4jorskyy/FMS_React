@@ -82,13 +82,9 @@ export default function useEditUser(user, onSuccess) {
             setShowAlert(true)
 
             if (nick !== prevNick) {
-                queryClient.removeQueries(['user', prevNick])
+                queryClient.invalidateQueries(['users'])
                 onSuccess?.(nick)
             }
-
-            setTimeout(() => {
-                window.location.reload()
-            }, 1000)
 
             setFirstName("")
             setLastName("")
