@@ -58,7 +58,7 @@ https://app.fms-project.fun/
 | **Frontend** | **Backend** | **Dev Tools** |
 |--------------|-------------|---------------|
 | React 18 + Vite | Django REST API | TanStack Query |
-| React Router v6 | PostgreSQL | Axios |
+| React Router v6 | PostgreSQL | js-fetch |
 | Tailwind CSS | JWT Auth | js-cookie |
 | Lucide Icons | CORS Support | ESLint |
 | React Markdown | CSRF Protection | Git |
